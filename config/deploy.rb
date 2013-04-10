@@ -14,15 +14,15 @@ set :rails_env, 'production'
 
 namespace :deploy do
   task :start do
-    run "cd #{current_release} && bundle exec unicorn -E #{rails_env} -c /etc/unicorn/wetfeet.com.rb -D"
+    run "cd #{current_release} && bundle exec unicorn -E #{rails_env} -c /etc/unicorn/cloudspace_rss.rb -D"
   end
 
   task :stop do
-    run "kill -QUIT $(cat /var/run/wetfeet.com_unicorn.pid)"
+    run "kill -QUIT $(cat /var/run/cloudspace_rss_unicorn.pid)"
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "kill -USR2 $(cat /var/run/wetfeet.com_unicorn.pid)"
+    run "kill -USR2 $(cat /var/run/cloudspace_rss_unicorn.pid)"
   end
 
   namespace :db do
