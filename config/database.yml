@@ -26,7 +26,7 @@ staging:
   pool: 5
   username: cloudspace_rss
   password: 29dkgj298JD9
-  host: localhost
+  host: 54.235.68.139
 
 production:
   adapter: mysql2
@@ -36,4 +36,4 @@ production:
   pool: 5
   username: cloudspace_rss
   password: 29dkgj298JD9
-  host: localhost
+  host: 54.235.68.139
