@@ -12,6 +12,10 @@ class FeedsController < ApplicationController
     render :json=> matching_feeds
   end
   
+  def show
+    render :json=>Feed.find(params[:id])
+  end
+  
   # POST /feeds
   def create
     
@@ -23,7 +27,7 @@ class FeedsController < ApplicationController
       feed.sanitize_entries!
       
       for entry in feed.entries
-        FeedItem.create(:name=>entry.title, :url=>entry.url, :description=>entry.content, :feed_id=>f.id)
+        FeedItem.create(:name=>entry.title, :url=>entry.url, :description=>entry.summary, :feed_id=>f.id)
       end
       
       render :json => f.feed_items
