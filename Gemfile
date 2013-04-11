@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'feedzirra'
+gem 'readability'
+gem 'link_thumbnailer'
+
 
 gem 'rails', '3.2.11'
 gem 'mysql2'
