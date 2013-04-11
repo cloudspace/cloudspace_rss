@@ -51,6 +51,7 @@ GEM
       rake (>= 0.9.2)
       rdoc (~> 3.8)
       sax-machine (~> 0.0.20)
+    guess_html_encoding (0.0.9)
     hashie (1.2.0)
     hike (1.2.2)
     i18n (0.6.4)
@@ -104,6 +105,9 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     rmagick (2.13.2)
+    ruby-readability (0.5.7)
+      guess_html_encoding (>= 0.0.4)
+      nokogiri (>= 1.4.2)
     sass (3.2.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -142,6 +146,7 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.11)
   rake
+  ruby-readability
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

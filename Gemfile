@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'feedzirra'
-gem 'readability'
+gem 'ruby-readability'
 gem 'link_thumbnailer'
 
 
