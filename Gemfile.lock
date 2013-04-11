@@ -152,6 +152,7 @@ DEPENDENCIES
   jquery-rails
   link_thumbnailer
   mysql2
+  nokogiri (= 1.5.9)
   rails (= 3.2.11)
   rake
   ruby-readability
