@@ -72,9 +72,10 @@ class FeedsController < ApplicationController
       
       if params.has_key?(:limit)
         requested_items = requested_items.limit(params[:limit])
-        if params.has_key?(:offset)
-          requested_items = requested_items.offset(params[:offset])
-        end
+      end
+      
+      if params.has_key?(:offset)
+        requested_items = requested_items.offset(params[:offset])
       end
       
       return render :json => requested_items
@@ -82,14 +83,22 @@ class FeedsController < ApplicationController
 
 
     if params.has_key?(:name)
-      matching_feeds = {:feeds => Feed.where(['name like ?', "#{params[:name]}%"])}
+      requested_items = {:feeds => Feed.where(['name like ?', "#{params[:name]}%"])}
     else
-      matching_feeds = {:feeds => Feed.where(['name IS NOT NULL'])}
+      requested_items = {:feeds => Feed.where(['name IS NOT NULL'])}
     end
     
-    return render :json=> matching_feeds
+    if params.has_key?(:limit)
+      requested_items = requested_items.limit(params[:limit])
+    end
+    if params.has_key?(:offset)
+        requested_items = requested_items.offset(params[:offset])
+    end
+    
+    return render :json=> requested_items
   end
   
+  # Get /feeds/:id
   def show
     render :json=>Feed.find(params[:id])
   end
