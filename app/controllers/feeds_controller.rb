@@ -66,25 +66,18 @@ class FeedsController < ApplicationController
         
         requested_items = feed.feed_items
         
-        if params.has_key?(:limit)
-          requested_items = requested_items.limit(params[:limit])
-          if params.has_key?(:offset)
-            requested_items = requested_items.offset(params[:offset])
-          end
-        end
-
-        return render :json => requested_items
       else
         requested_items = FeedItem.with_feed_url(params["url"])
-        if params.has_key?(:limit)
-          requested_items = requested_items.limit(params[:limit])
-          if params.has_key?(:offset)
-            requested_items = requested_items.offset(params[:offset])
-          end
-        end
-        
-        return render :json => requested_items
       end
+      
+      if params.has_key?(:limit)
+        requested_items = requested_items.limit(params[:limit])
+        if params.has_key?(:offset)
+          requested_items = requested_items.offset(params[:offset])
+        end
+      end
+      
+      return render :json => requested_items
     end
 
 

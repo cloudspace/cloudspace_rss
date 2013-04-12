@@ -9,6 +9,7 @@ gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'sqlite3'
 gem 'fastimage'
+gem 'whenever', :require => false
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

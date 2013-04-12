@@ -5,4 +5,7 @@ class FeedItem < ActiveRecord::Base
   
   scope :with_feed_url, lambda { |url| joins(:feed).where('feeds.url = ?', url) }
 
+  def self.purge_old_records
+    FeedItem.delete_all(["created_at < ?", 2.weeks.ago])
+  end
 end
