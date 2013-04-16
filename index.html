@@ -1,0 +1,1756 @@
+
+
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7 lang-en" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie10 lt-ie9 lt-ie8 lang-en" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie10 lt-ie9 lang-en" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10 lang-en" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js lang-en" lang="en"> <!--<![endif]-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="icon" type="image/ico" href="//d36cz9buwru1tt.cloudfront.net/favicon.ico">
+  <link rel="shortcut icon" type="image/ico" href="//d36cz9buwru1tt.cloudfront.net/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-iphone-114-precomposed.png">       
+  <link rel="apple-touch-icon" sizes="72x72" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-ipad-144-precomposed.png">         
+  <link rel="apple-touch-icon" sizes="114x114" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-iphone-114-precomposed.png">     
+  <link rel="apple-touch-icon" sizes="144x144" href="//d36cz9buwru1tt.cloudfront.net/touch-icon-ipad-144-precomposed.png">       
+  <meta name="description" content="Amazon Simple Storage Service provides a fully redundant data storage infrastructure for storing and retrieving any amount of data, at any time, from anywhere on the Web. " /><meta name="keywords" content="" />
+  <meta name="google-site-verification" content="XHghG81ulgiW-3EylGcF48sG28tBW5EH0bNUhgo_DrU" /> 
+
+  <title>Amazon S3,  Cloud Computing Storage for Files, Images, Videos </title>
+
+  
+
+  <link rel="stylesheet" href="/css/screen_2.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/css/awsGlobalNav3-ltIE9.css" type="text/css" />
+  <![endif]-->
+  <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/css/awsGlobalNav3-ltIE8.css" type="text/css" />
+  <![endif]-->
+  <!--[if lt IE 7]>
+    <link rel="stylesheet" href="/css/awsGlobalNav3-ltIE7.css" type="text/css" />
+    <link rel="stylesheet" href="/css/documentationIE6.css" type="text/css" />
+  <![endif]-->
+
+  
+
+  
+    
+  <style type="text/css">
+.pricingTable .rate {
+  text-align: center;
+}
+#requestPricing .price,
+#requestPricing .type
+{
+  text-align: left;
+  padding-left: 10em;
+}
+#requestPricing .type {
+  padding-left: 15em;
+}
+#storagePricing .price {
+  text-align: center;
+}
+</style>
+
+
+
+<style type="text/css">
+
+.button.sign-up {
+text-align: center!important;
+}
+
+#get-started-promo {
+padding-left: 25px;
+float: left;
+width: 28%;
+font-family: arial, sans-serif;
+}
+
+#get-started-promo a.view-offer-link {
+font-size: 14px;
+}
+
+#get-started-promo p {
+text-align: left;
+font-size: 13px;
+line-height: 1.5;
+color: #2e3741;
+}
+
+#get-started-promo .promo-title {
+color: #222;
+font-size: 17px;
+text-align: center;
+}
+
+#get-started-promo .sign-up-now-button {
+text-align: center;
+font-size: 15px;
+}
+
+#get-started-promo .sign-up-now-button a.button {
+width: 90%;
+}
+
+
+.no_orange_bullets ul li {
+background-image: none;
+}
+</style>
+  
+
+  <script src="/js/all_2.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  __amznUtmPage = "/s3/";
+</script>
+<script src="/js/amznUrchin.js" type="text/javascript"></script> 
+</head>
+
+<body id="top" class="yui-skin-sam noJS">
+  
+  <!-- layout _210_left -->
+  <div id="doc4" class="yui-t2">
+    <div id="hd">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- header -->
+
+<div id="main-nav" class="nav-lang-en">
+  <a href="//aws.amazon.com/" id="nav-aws-logo" class="nav-sprite" title="Amazon Web Services"><span>Amazon Web Services</span></a>
+
+  <div id="nav-bar" class="nav-sprite">
+    <a id="nav-dd-products-solutions" class="nav-link" href="//aws.amazon.com/products-solutions/">
+      <strong>AWS Products</strong> &amp; <strong>Solutions</strong>
+    </a>
+
+    <form id="nav-search-form" method="get" action="//aws.amazon.com/search">
+      <div id="nav-searchfield-outer" class="nav-sprite">
+        <div id="nav-searchfield-inner" class="nav-sprite">
+          <div id="nav-searchfield-width">
+            <input id="nav-searchfield" name="searchQuery"></input>
+          </div>
+        </div>
+      </div>
+
+      <span id="nav-search-in" class="nav-sprite">
+        <span id="nav-search-in-content">Search In</span>
+        <span class="nav-down-arrow nav-sprite"></span>
+        <select name="searchPath" id="nav-search-dropdown"></select>
+      </span>
+
+      <div id="nav-search-button" class="nav-sprite">
+        <input type="image" alt="Search" id="nav-search-button-inner" title="Search" src="//d36cz9buwru1tt.cloudfront.net/nav/transparent_pixel.gif">
+      </div>
+    </form>
+
+    <a id="nav-dd-developers" class="nav-link" href="//aws.amazon.com/developers/">
+      <strong>Developers</strong>
+    </a>
+
+    <a id="nav-dd-support" class="nav-link" href="//aws.amazon.com/support/">
+      <strong>Support</strong>
+    </a>
+  </div>
+
+  <div id="global-top-links">
+    <a href="https://portal.aws.amazon.com/gp/aws/developer/registration/index.html" id="gtl-sign-up">Sign Up</a>
+    <a href="https://console.aws.amazon.com/" id="gtl-dd-account-console">My Account / Console</a>
+  </div>
+</div>
+
+
+
+<noscript>
+  <!--#if expr="${LANG_NOT_FOUND}" -->
+    <div id="pageNotTranslated">
+      <!--#include virtual="/errors/untranslated/$LANG_NOT_FOUND/index.html" -->
+    </div>
+  <!--#endif -->
+</noscript>
+
+
+<script type="text/javascript">
+  if ( ! window.AWSGlobalNav ) {
+      AWSGlobalNav = {};
+  }
+
+  // This has to be set early (before the onload handlers execute)
+  AWSGlobalNav.acceptLanguage = '<!--#echo var="ACCEPT_LANGUAGE_HEADER" -->';
+  AWSGlobalNav.contentBaseURL = '//aws.amazon.com';
+</script>
+
+<!-- /header -->
+
+</div> 
+    <div id="bd">
+<!-- layout product_detail -->
+<div id="yui-main" style="line-height:1.5em;">
+  <div class="yui-b">
+    
+<div class="awsJS-slideAd">
+
+  
+  <div class="slideAd-close">
+    &times;
+  </div>
+
+  
+  <a onclick="javascript:urchinTracker('/clicktrack/s3/event/summit_series/');" 
+    href="/aws-summit-2013/?sc_ichannel=BA&sc_icampaign=Summit13_Glbl&sc_icontent=register&sc_iplace=S3&sc_idetail=All&TRK=BA_Summit13_Glbl_reg_S3_All"
+    class="hlp-banner" style="padding: 0px;">
+    <div id="sad-summit">
+      <span class="bnr-copy" style="padding-top: 21px;">
+        <span style="font-weight: bold;">AWS Global Summit Series</span><br/>
+        Get up-to-speed on the latest AWS Cloud Computing services at these free events worldwide.
+        <span class="bnr-linkText" style="font-weight: bold;">Reserve your free seat today &raquo;</span>
+      </span>
+    </div>
+  </a>
+
+</div>
+
+<h1 class="title">Amazon Simple Storage Service (Amazon S3)</h1>
+
+<div class="yui-gc"> 
+  <div class="yui-u first bordrt" style="width: 467px">
+
+<p>Amazon S3 is storage for the Internet. It is designed to make web-scale computing easier for developers.<br><br>
+
+Amazon S3 provides a simple web services interface that can be used to store and retrieve any amount of data, at any time, from anywhere on the web. It gives any developer access to the same highly scalable, reliable, secure, fast, inexpensive infrastructure that Amazon uses to run its own global network of web sites. The service aims to maximize benefits of scale and to pass those benefits on to developers.</p>
+<p>&nbsp;</p> 
+  </div>
+
+<div id="get-started-promo"> 
+    <span class="promo-title" style="line-height:1.2;">Get Started with<br> AWS for Free</span>
+<span class="sign-up-now-button"><a href="https://portal.aws.amazon.com/gp/aws/developer/subscription/index.html?productCode=AmazonS3" onclick="javascript:urchinTracker('/clicktrack/s3/button/subscription/index.html?productCode=AmazonS3');"  class="button sign-up" style="margin-top:8px; margin-bottom:10px;">Sign Up Now &raquo;</a></span>
+<br />
+<p>AWS Free Tier includes <strong>5GB storage, 20,000 Get Requests, and 2,000 Put Requests</strong> with Amazon S3.</p>
+<a href="/free" class="view-offer-link" onclick="javascript:urchinTracker('/clicktrack/s3/link/free/');">View AWS Free Tier Details &raquo;</a>
+<br>
+</div>
+</div>
+
+    <hr class="mar_top_10"> 
+
+    <div class="mar_top_10">
+This page contains the following categories of information.  Click to jump down:
+</div>
+
+<div class="yui-g">
+<div class="yui-u first arrow_bullets">
+  <ul>
+    
+    
+      <li><a href="#functionality">Amazon S3 Functionality</a>
+    
+    
+    
+    
+    
+    
+    
+    
+      <li><a href="#protecting">Protecting Your Data</a>
+    
+    
+      <li><a href="#managing">Managing Your Data</a>
+    
+    
+      <li><a href="#pricing">Pricing</a>
+    
+    
+    
+      <li><a href="#getting-started">Getting Started with Amazon S3</a>
+    
+    
+    
+  </ul>
+</div>
+<div class="yui-u arrow_bullets">
+  <ul>
+    
+      <li><a href="#importexport">Transferring Large Amounts of Data</a>
+    
+    
+      <li><a href="#common-use-cases">Common Use Cases</a>
+    
+    
+   
+   
+    
+      <li><a href="#resources">Resources</a>
+    
+      
+      
+    
+    
+      <li><a href="#requirements">Amazon S3 Design Requirements</a>
+    
+    
+    
+    
+      <li><a href="#legal">Intended Usage and Restrictions</a>
+    
+  </ul>
+</div>
+</div>
+
+    <div class="underline">    
+      
+    </div>
+    <div class="underline" style="padding-top:6px;">    
+      
+        <hr />
+        <h1 id="functionality">Amazon S3 Functionality</h1>
+        <p>Amazon S3 is intentionally built with a minimal feature set.</p>
+
+
+	<ul>
+	<li>Write, read, and delete objects containing from 1 byte to 5 terabytes of data each. The number of objects you can store is unlimited.</li>
+		<li>Each object is stored in a bucket and retrieved via a unique, developer-assigned key.</li>
+		<li>A bucket can be stored in one of several Regions.  You can choose a Region to optimize for latency, minimize costs, or address regulatory requirements.  Amazon S3 is currently available in the US Standard, US West (Oregon), US West (Northern California), EU (Ireland), Asia Pacific (Singapore), Asia Pacific (Tokyo), Asia Pacific (Sydney), South America (Sao Paulo),  and GovCloud (US) Regions.  The US Standard Region automatically routes requests to facilities in Northern Virginia or the Pacific Northwest using network maps. </li>
+		<li>Objects stored in a Region never leave the Region unless you transfer them out.  For example, objects stored in the EU (Ireland) Region never leave the EU.  </li>
+		<li>Authentication mechanisms are provided to ensure that data is kept secure from unauthorized access. Objects can be made private or public, and rights can be granted to specific users.</li>
+		<li>Options for secure data upload/download and encryption of data at rest are provided for additional data protection.</li>
+		<li>Uses standards-based REST and SOAP interfaces designed to work with any Internet-development toolkit.</li>
+		<li>Built to be flexible so that protocol or functional layers can easily be added.  The default download protocol is HTTP.  A BitTorrent&#8482; protocol interface is provided to lower costs for high-scale distribution. </li>
+		<li>Provides functionality to simplify manageability of data through its lifetime.  Includes options for segregating data by buckets, monitoring and controlling spend, and automatically archiving data to even lower cost storage options. These options can be easily administered from the <a href="http://console.aws.amazon.com/s3">Amazon S3 Management Console</a>.</li>
+		<li>Reliability backed with the <a href="/s3-sla">Amazon S3 Service Level Agreement</a>.</li>
+	</ul>
+
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div> 
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+        <hr />
+        <h1 id="protecting">Protecting Your Data</h1>
+        <p>Data stored in Amazon S3 is secure by default; only bucket and object owners have access to the Amazon S3 resources they create. Amazon S3 supports multiple access control mechanisms, as well as encryption for both secure transit and secure storage on disk. With Amazon S3’s data protection features, you can protect your data from both logical and physical failures, guarding against data loss from unintended user actions, application errors, and infrastructure failures. For customers who must comply with regulatory standards such as PCI and HIPAA, Amazon S3’s data protection features can be used as part of an overall strategy to achieve compliance. The various data security and reliability features offered by Amazon S3 are described in detail below.</p>
+
+<div class="h2" style="padding-bottom:0px;margin-bottom:6px;">Data Security Details</div>
+<p>Amazon S3 supports several mechanisms that give you flexibility to control who can access your data as well as how, when, and where they can access it. Amazon S3 provides four different access control mechanisms: Identity and Access Management (IAM) policies, Access Control Lists (ACLs), bucket policies, and query string authentication. IAM enables organizations with multiple employees to create and manage multiple users under a single AWS account. With IAM policies, you can grant IAM users fine-grained control to your Amazon S3 bucket or objects. You can use ACLs to selectively add (grant) certain permissions on individual objects. Amazon S3 Bucket Policies can be used to add or deny permissions across some or all of the objects within a single bucket. With Query string authentication, you have the ability to share Amazon S3 objects through URLs that are valid for a predefined expiration time.</p>
+<p>You can securely upload/download your data to Amazon S3 via the SSL encrypted endpoints using the HTTPS protocol. Amazon S3 also provides multiple options for encryption of data at rest. If you prefer to manage your own encryption keys, you can use a client encryption library like the <a href="http://docs.amazonwebservices.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3EncryptionClient.html">Amazon S3 Encryption Client</a> to encrypt your data before uploading to Amazon S3. Alternatively, you can use Amazon S3 Server Side Encryption (SSE) if you prefer to have Amazon S3 manage encryption keys for you.  With Amazon S3 SSE, you can encrypt data on upload simply by adding an additional request header when writing the object. Decryption happens automatically when data is retrieved.</p>
+<p>Amazon S3 also supports logging of requests made against your Amazon S3 resources. You can configure your Amazon S3 bucket to create access log records for the requests made against it. These server access logs capture all requests made against a bucket or the objects in it and can be used for auditing purposes.</p>
+<p>For more information on the security features available in Amazon S3, please refer to <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/UsingAuthAccess.html">Access Control</a> and <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/UsingEncryption.html">Using Data Encryption</a> topics in the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/">Amazon S3 Developer Guide</a>. For an overview on security on AWS, including Amazon S3, please refer to <a href="http://awsmedia.s3.amazonaws.com/pdf/AWS_Security_Whitepaper.pdf">Amazon Web Services: Overview of Security Processes</a> document.</p>
+
+<div class="h2" style="padding-bottom:0px;margin-bottom:6px;">Data Durability and Reliability</div>
+<p>Amazon S3 provides a highly durable storage infrastructure designed for mission-critical and primary data storage. The service redundantly stores data in multiple facilities and on multiple devices within each facility.  To increase durability, Amazon S3 synchronously stores your data across multiple facilities before returning SUCCESS.  In addition, Amazon S3 calculates checksums on all network traffic to detect corruption of data packets when storing or retrieving data.  Unlike traditional systems which can require laborious data verification and manual repair, Amazon S3 performs regular, systematic data integrity checks and is built to be automatically self-healing.</p>
+
+<p>Amazon S3 provides further protection via Versioning.  You can use Versioning to preserve, retrieve, and restore every version of every object stored in your Amazon S3 bucket.  This allows you to easily recover from both unintended user actions and application failures.  By default, requests will retrieve the most recently written version.  Older versions of an object can be retrieved by specifying a version in the request.  Storage rates apply for every version stored.</p>
+
+Amazon S3’s standard storage is:         
+	<ul>
+	<li>Backed with the <a href="/s3-sla">Amazon S3 Service Level Agreement</a>.</li>
+		<li>Designed for 99.999999999% durability and 99.99% availability of objects over a given year.   </li>
+		<li>Designed to sustain the concurrent loss of data in two facilities.</li>
+	</ul>
+
+
+	
+
+
+<div class="h3" style="padding-bottom:0px;margin-bottom:6px;" id="rss">Reduced Redundancy Storage (RRS)</div>
+Reduced Redundancy Storage (RRS) is a storage option within Amazon S3 that enables customers to reduce their costs by storing non-critical, reproducible data at lower levels of redundancy than Amazon S3’s standard storage. It provides a cost-effective, highly available solution for distributing or sharing content that is durably stored elsewhere, or for storing thumbnails, transcoded media, or other processed data that can be easily reproduced.  The RRS option stores objects on multiple devices across multiple facilities, providing 400 times the durability of a typical disk drive, but does not replicate objects as many times as standard Amazon S3 storage, and thus is even more cost effective.   
+
+Reduced Redundancy Storage is: 
+	<ul>
+	<li>Backed with the <a href="/s3-sla">Amazon S3 Service Level Agreement</a>.</li>
+		<li>Designed to provide 99.99% durability and 99.99% availability of objects over a given year.  This durability level corresponds to an average annual expected loss of 0.01% of objects. </li>
+		<li>Designed to sustain the loss of data in a single facility.</li>
+	</ul>
+
+
+
+<div class="h3" style="padding-bottom:0px;margin-bottom:6px;">Amazon Glacier</div>
+<p>Amazon S3 enables you to utilize Amazon Glacier’s extremely low-cost storage service as a storage option for data archival.  Amazon Glacier stores data for as little as $0.01 per gigabyte per month, and is optimized for data that is infrequently accessed and for which retrieval times of several hours are suitable.  Examples include digital media archives, financial and healthcare records, raw genomic sequence data, long-term database backups, and data that must be retained for regulatory compliance.</p>
+
+<p>Like Amazon S3’s other storage options (Standard or Reduced Redundancy Storage), objects stored in Amazon Glacier using Amazon S3’s APIs or Management Console have an associated user-defined name.  You can get a real-time list of all of your Amazon S3 object names, including those stored using the Amazon Glacier option, using the Amazon S3 LIST API.  Objects stored directly in Amazon Glacier using Amazon Glacier’s APIs cannot be listed in real-time, and have a system-generated identifier rather than a user-defined name.  Because Amazon S3 maintains the mapping between your user-defined object name and the Amazon Glacier system-defined identifier, Amazon S3 objects that are stored using the Amazon Glacier option are only accessible through Amazon S3’s APIs or the Amazon S3 Management Console.  To restore Amazon S3 data that was stored in Amazon Glacier via the Amazon S3 APIs or Management Console, you first initiate a restore job using the Amazon S3 APIs or Management Console.  Restore jobs typically complete in 3 to 5 hours. Once the job is complete, you can access your data through an Amazon S3 GET request.</p>
+
+The Amazon Glacier storage option is:
+	<ul>
+	<li>Backed with the <a href="/s3-sla">Amazon S3 Service Level Agreement</a>.</li>
+		<li>Designed for 99.999999999% durability and 99.99% availability of objects over a given year.</li>
+		<li>Designed to sustain the concurrent loss of data in two facilities.</li>
+	</ul>
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      
+    </div>
+    
+      <div class="underline">    
+        <hr />
+        <h1 id="managing">Managing Your Data</h1>
+        <p>Amazon S3 makes it easy to manage your data.  With Amazon S3’s data lifecycle management capabilities, you can automatically archive objects to even lower cost storage options or perform recurring deletions, enabling you to reduce your costs over an object’s lifetime.  Amazon S3 also allows you to monitor and control your costs across your different business functions.  All of these management capabilities can be easily administered using the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/API/">Amazon S3 APIs</a> or <a href="http://console.aws.amazon.com/s3">Management Console</a>.  The various data management features offered by Amazon S3 are described in detail below.</p>
+
+<div class="h2" style="padding-bottom:0px;margin-bottom:6px;">Data Lifecycle Management</div>
+<p>Lifecycle management of data refers to how your data is managed and stored from creation and initial storage to when it’s no longer needed and deleted.  Amazon S3 provides a number of capabilities to simplify the lifecycle management of your data, including management of capacity, automated archival to lower cost storage, and scheduled deletions.</p>
+<p>When storing new data, Amazon S3 eliminates the need for capacity planning by enabling you to both scale on-demand and pay only for the capacity you use.  With traditional storage systems, capacity planning can be an error-prone process, especially when storage growth is unpredictable, as it often is.  Over provisioning capacity can result in under-utilization and higher costs, while under provisioning can trigger expensive hardware upgrades far earlier than planned.</p>
+<p>As your data ages, Amazon S3 takes care of automatically and transparently migrating your data to new hardware as hardware fails or reaches its end of life.  This eliminates the need for you to perform expensive, time-consuming, and risky hardware migrations.  Amazon S3 also enables you to automatically archive your data to lower cost storage as your data ages.  You can define rules to automatically archive sets of Amazon S3 objects to Amazon Glacier based on their lifetime.  Data archival rules are supported for Amazon S3 objects in the US-Standard, US-West (N. California), US-West (Oregon), EU-West (Ireland), and Asia Pacific (Japan) Regions</p>
+<p>When your data reaches its end of life, Amazon S3 provides programmatic options for recurring and high volume deletions.  For recurring deletions, rules can be defined to remove sets of objects after a pre-defined time period.  For efficient one-time deletions, up to 1,000 objects can be deleted with a single request.  These rules can be applied to standard objects, RRS objects, or objects that have been archived to Amazon Glacier.</p>
+
+
+<h2>Cost Monitoring and Controls</h2>
+
+<p>Amazon S3 offers several features for managing and controlling your costs.  You can use the AWS Management Console or the Amazon S3 APIs to apply tags to your Amazon S3 buckets, enabling you to allocate your costs across multiple business dimensions, including cost centers, application names, or owners.  You can then view breakdowns of these costs using Amazon Web Services’ Cost Allocation Reports, which show your usage and costs aggregated by your tags.  For more information on Cost Allocation and tagging, please visit <a href="http://docs.amazonwebservices.com/awsaccountbilling/latest/about/getbill.html#allocation">About AWS Account Billing</a>. For more information on tagging your S3 buckets, please see the <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/BucketBilling.html">Bucket Tagging</a> topic in the <a href="/documentation/s3/">Amazon S3 Developer Guide</a>.</p>
+<p>You can use <a href="/cloudwatch/">Amazon CloudWatch</a> to receive billing alerts that help you monitor the Amazon S3 charges on your bill.  You can set up an alert to be notified automatically via e-mail when estimated charges reach a threshold that you choose.  For additional information on billing alerts, you can visit the <a href="https://aws-portal.amazon.com/gp/aws/developer/account/index.html?ie=UTF8&action=billing-alerts&">billing alerts page</a> or see the <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/monitor_estimated_charges_with_cloudwatch.html">Monitor Your Estimated Charges</a> topic in the <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/Welcome.html">Amazon CloudWatch Developer Guide</a>.</p>
+
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      </div>
+    
+    <div class="underline">    
+      
+        <hr />
+        <h1 id="pricing">Pricing</h1>
+        <div class="no_orange_bullets">
+
+   <p>
+  Pay only for what you use. There is no minimum fee. Estimate
+  your monthly bill using the <a href="/calculator/">AWS Simple
+  Monthly Calculator</a>. We charge less where our costs are less, and
+  prices are based on the location of your Amazon S3 bucket.
+</p>
+
+<div style="background-color:#FDFDEF; border:solid 1px #C9CDD0; padding:12px 14px 12px 14px;">
+  <p style="color:#E47911; font-weight:bold; font-size:125%">AWS Free Usage Tier<code>*</code></p>
+
+  <p>As part of the <a href="/free/">AWS Free Usage Tier</a>, you can get
+  started with Amazon S3 for free. Upon sign-up, new AWS customers
+  receive 5 GB of Amazon S3 standard storage, 20,000 Get Requests, 2,000 Put
+  Requests, and 15GB of data transfer out
+  each month for one year.</p>
+</div>
+
+<h2>Storage Pricing</h2>
+
+<p>
+</p>
+
+<div id="storagePricing" class="pricingTable">
+  <noscript>
+    Sorry, pricing information requires JavaScript.
+  </noscript>
+</div>
+
+<h2>Request Pricing</h2>
+
+<div id="requestPricing" class="pricingTable">
+  <noscript>
+    Sorry, pricing information requires JavaScript.
+  </noscript>
+</div>
+
+<h2>Data Transfer Pricing</h2>
+<p>
+  The pricing below is based on data transferred &quot;in&quot; to and
+  &quot;out&quot; of Amazon S3.
+</p>
+<div id="dataXferPricing" class="pricingTable">
+  <noscript>
+    Sorry, pricing information requires JavaScript.
+  </noscript>
+</div>
+
+<p>Storage and bandwidth size includes all file overhead.</p>
+
+<p>
+Rate tiers take into account your aggregate usage for Data Transfer Out to the Internet across Amazon EC2, Amazon S3, Amazon Glacier, Amazon RDS, Amazon SimpleDB, Amazon SQS, Amazon SNS, Amazon DynamoDB, and AWS Storage Gateway.
+</p>
+
+<h2>AWS GovCloud Region</h2>
+
+<p>
+<a href="/govcloud-us/">AWS GovCloud</a> is an AWS Region designed to allow U.S. government agencies and contractors to move more sensitive workloads into the cloud by addressing their specific regulatory and compliance requirements. For pricing and more information on the new AWS GovCloud Region, please visit the <a href="/govcloud-us/">AWS GovCloud web page</a>.
+</p>
+
+<div style="font-size:11px;">
+  <code>*</code> Your usage for the free tier is calculated each month across all regions except the AWS GovCloud Region and automatically applied to your bill &#8211; unused monthly usage will not roll over. Restrictions apply; See <a href="/free/">offer terms</a> for more details.
+</div>
+
+<p>
+  <i>(Amazon S3 is sold by Amazon Web Services, Inc..)</i>
+</p>
+
+<select id="s3Dictionary" class="pricingTableDictionary">
+  <option value="us-east">US Standard</option>
+  <option value="us-east-virginia">US East (N. Virginia)</option>
+  <option value="us-west-2">US West (Oregon)</option>
+  <option value="apac-syd">Asia Pacific (Sydney)</option>
+  <option value="sa-east-1">South America (Sao Paulo)</option>
+  <option value="storage">Standard Storage</option>
+  <option value="reducedRedundancyStorage">Reduced Redundancy Storage</option>
+  <option value="glacierStorage">Glacier Storage</option>
+  <option value="glacierRequests">Glacier Archive and Restore Requests</option>
+  <option value="glacierDataRestore">Glacier Data Restores</option>
+  <option value="glacierRegions">Glacier Storage is not available in all regions.</option>
+  <option value="deleteRequests">Delete Requests</option>
+  <option value="free">Free</option>
+  <option value="dataXfer">Data Transfer**</option>
+  <option value="requests">Requests</option>
+  <option value="designed109Durable">Designed for 99.999999999% Durability</option>
+  <option value="designed49sDurable">Designed for 99.99% Durability</option>
+  <option value="perGB">per GB</option>
+  <option value="firstTBstorage">First 1 TB / month</option>
+  <option value="next49TBstorage">Next 49 TB / month</option>
+  <option value="next350TBout">Next 350 TB / month</option>
+  <option value="next450TBstorage">Next 450 TB / month</option>
+  <option value="next500TBstorage">Next 500 TB / month</option>
+  <option value="next4000TBstorage">Next 4000 TB / month</option>
+  <option value="next05PBout">Next 524 TB / month</option>
+  <option value="next4PBout">Next 4 PB / month</option>
+  <option value="greater5PBout">Greater than 5 PB / month</option>
+  <option value="over5000TBstorage">Over 5000 TB / month</option>
+  <option value="allXferIn">All data transfer in</option>
+  <option value="putcopypost">PUT, COPY, POST, or LIST Requests</option>
+  <option value="pricing">Pricing</option>
+  <option value="dataXferIn">Data Transfer IN</option>
+  <option value="dataXferOut">Data Transfer OUT</option>
+  <option value="dataXferInS3">Data Transfer IN To Amazon S3</option>
+  <option value="dataXferOutS3">Data Transfer OUT From Amazon S3 To Internet</option>
+  <option value="dataXferOutS3CrossRegion">Data Transfer OUT From Amazon S3 To</option>
+  <option value="dataXferInGlacier">Data Transfer IN To Amazon Glacier</option>
+  <option value="dataXferOutGlacier">Data Transfer OUT From Amazon Glacier To Internet</option>
+  <option value="dataXferOutGlacierCrossRegion">Data Transfer OUT From Amazon Glacier To</option>
+  <option value="allDataXferIn">All data transfer in</option>
+  <option value="inRegionUSStandard">Amazon EC2 in the Northern Virginia Region</option>
+  <option value="inRegion">Amazon EC2 in the same region</option>
+  <option value="crossRegionS3">Another AWS Region or Amazon CloudFront</option>
+  <option value="crossRegion">Another AWS Region</option>
+  <option value="firstGBout">First 1 GB / month</option>
+  <option value="upTo10TBout">Up to 10 TB / month</option>
+  <option value="next40TBout">Next 40 TB / month</option>
+  <option value="next100TBout">Next 100 TB / month</option>
+  <option value="over150TBout">Greater than 150 TB / month</option>
+  <option value="allXferIn">All data transfer in</option>
+  <option value="getEtc">GET and all other Requests</option>
+  <option value="per1kReq">per &nbsp;1,000 requests</option>
+  <option value="per10kReq">per 10,000 requests</option>
+</select>
+
+<div class="pricingTableDictionary">
+  <div class="dictkey-contactus"><a href="/contact-us/aws-sales/">Contact Us</a></div>
+  <div class="dictkey-chargesForGlacierDeletes03"><span style="font-size:11px;">No charge for delete requests of Standard or RRS objects. For objects that are archived to Glacier, there is a pro-rated charge of $0.03 per gigabyte for objects deleted prior to 90 days. <a href='/s3/faqs/#How_am_I_charged_for_deleting_objects_from_Amazon_Glacier_that_are_less_than_3_months_old'>Learn more.</a></span></div>
+  <div class="dictkey-glacierNotes01"><span style="font-size:11px;">Glacier is designed with the expectation that restores are infrequent and unusual, and data will be stored for extended periods of time. You can restore up to 5% of your average monthly Glacier storage (pro-rated daily) for free each month. If you choose to restore more than this amount of data in a month, you are charged a restore fee starting at $0.01 per gigabyte. <a href='/s3/faqs/#How_much_data_can_I_restore_for_free'>Learn more.</a></span></div>
+  <div class="dictkey-chargesForGlacierDeletes033"><span style="font-size:11px;">No charge for delete requests of Standard or RRS objects. For objects that are archived to Glacier, there is a pro-rated charge of $0.033 per gigabyte for objects deleted prior to 90 days. <a href='/s3/faqs/#How_am_I_charged_for_deleting_objects_from_Amazon_Glacier_that_are_less_than_3_months_old'>Learn more.</a></span></div>
+  <div class="dictkey-glacierNotes011"><span style="font-size:11px;">Glacier is designed with the expectation that restores are infrequent and unusual, and data will be stored for extended periods of time. You can restore up to 5% of your average monthly Glacier storage (pro-rated daily) for free each month. If you choose to restore more than this amount of data in a month, you are charged a restore fee starting at $0.011 per gigabyte. <a href='/s3/faqs/#How_much_data_can_I_restore_for_free'>Learn more.</a></span></div>
+  <div class="dictkey-chargesForGlacierDeletes036"><span style="font-size:11px;">No charge for delete requests of Standard or RRS objects. For objects that are archived to Glacier, there is a pro-rated charge of $0.036 per gigabyte for objects deleted prior to 90 days. <a href='/s3/faqs/#How_am_I_charged_for_deleting_objects_from_Amazon_Glacier_that_are_less_than_3_months_old'>Learn more.</a></span></div>
+  <div class="dictkey-glacierNotes012"><span style="font-size:11px;">Glacier is designed with the expectation that restores are infrequent and unusual, and data will be stored for extended periods of time. You can restore up to 5% of your average monthly Glacier storage (pro-rated daily) for free each month. If you choose to restore more than this amount of data in a month, you are charged a restore fee starting at $0.012 per gigabyte. <a href='/s3/faqs/#How_much_data_can_I_restore_for_free'>Learn more.</a></span></div>
+  <div class="dictkey-noChargeForDeletes"><span style="font-size:11px;">No charge for delete requests of Standard or RRS objects.</span></div>
+</div>
+
+</div>
+
+
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+        <hr />
+        <h1 id="getting-started">Getting Started with Amazon S3</h1>
+        Using Amazon S3 is easy.  To get started you:         
+	<ul>
+	<li>Create a Bucket to store your data.  You can choose a Region where your bucket and object(s) reside to optimize latency, minimize costs, or address regulatory requirements.</li>
+		<li>Upload Objects to your Bucket.   Your data is durably stored and backed by the Amazon S3 Service Level Agreement. </li>
+		<li>Optionally, set access controls.  You can grants others access to your data from anywhere in the world.</li>
+	</ul>
+
+
+	<p>You can easily and securely create buckets, upload objects, and set access controls using the AWS Management Console.  The console provides a point-and-click web-based interface for accessing and managing all of your Amazon S3 resources.  The Amazon S3 <a href="http://docs.amazonwebservices.com/AmazonS3/latest/gsg/">Getting Started Guide</a> shows you how to start using Amazon S3 from the console.  Developers building applications can use the <a href="/sdkfornet">AWS SDK for .NET</a>, the <a href="/sdkforjava">AWS SDK for Java</a>, or a wide variety of 3rd party libraries for other platforms and languages.</p>
+
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      
+    </div>
+    <div class="underline">    
+      
+        <hr />
+        <h1 id="importexport">Transferring Large Amounts of Data</h1>
+        <p><a href="/importexport">AWS Import/Export</a> accelerates moving large amounts of data into and out of AWS using portable storage devices for transport. AWS transfers your data directly onto and off of storage devices using Amazon&#8217;s high-speed internal network and bypassing the Internet. For significant data sets, AWS Import/Export is often faster than Internet transfer and more cost effective than upgrading your connectivity. You can use AWS Import/Export for migrating data into the cloud, distributing content to your customers, sending backups to AWS, and disaster recovery.</p>
+
+<p>
+You can also use <a href="/directconnect">AWS Direct Connect</a> to transfer large amounts of data to Amazon S3.  AWS Direct Connect makes it easy to establish a dedicated network connection from your premise to AWS.  Using AWS Direct Connect, you can establish private connectivity between AWS and your datacenter, office, or colocation environment, which in many cases can reduce your network costs, increase bandwidth throughput, and provide a more consistent network experience than Internet-based connections. 
+</p>
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      
+    </div>
+    
+    <div class="underline">    
+      
+        <hr />
+        <h1 id="common-use-cases">Common Use Cases</h1>
+        <p>Amazon S3 can be used to support a wide variety of use cases, for example:</p>
+
+
+<div class="h2" style="padding-bottom:0px;margin-bottom:6px;">Content Storage and Distribution</div>
+Amazon S3 provides a highly durable and available store for a variety of content, ranging from web applications to media files.  It allows you to offload your entire storage infrastructure onto the cloud, where you can take advantage of Amazon S3’s scalability and pay-as-you-go pricing to handle your growing storage needs.  You can distribute your content directly from Amazon S3 or use Amazon S3 as an origin store for pushing content to your Amazon CloudFront edge locations.  
+<br><br>
+For sharing content that is either easily reproduced or where you’re storing an original copy elsewhere, Amazon S3’s Reduced Redundancy Storage (RRS) feature provides a compelling solution.  For example, if you’re storing media content in-house but you need to provide accessibility to your customers, channel partners, or employees, RRS is a low-cost solution for storing and sharing this content.  
+
+<div class="h2" style="padding-bottom:0px;margin-bottom:6px;">Storage for Data Analysis</div>
+Whether you’re storing pharmaceutical data for analysis, financial data for computation and pricing, or photo images for resizing, Amazon S3 is an ideal location to store your original content.  You can then send this content to Amazon EC2 for computation, resizing, or other large scale analytics – without incurring any data transfer charges for moving the data between the services.  You can then choose to store the resulting, reproducible content using Amazon S3’s Reduced Redundancy Storage feature (or, of course, you can store it using Amazon S3’s standard storage as well).        
+
+<div class="h2" style="padding-bottom:0px;margin-bottom:6px;">Backup, Archiving and Disaster Recovery</div>
+Amazon S3 offers a highly durable, scalable, and secure solution for backing up and archiving your critical data.  You can use Amazon S3’s Versioning capability to provide even further protection for your stored data.  If you have data sets of significant size, you can use <a href="/importexport">AWS Import/Export</a> to move large amounts of data into and out of AWS with physical storage devices.  This is ideal for moving large quantities of data for periodic backups, or quickly retrieving data for disaster recovery scenarios. You can also define rules to archive sets of Amazon S3 objects to Amazon Glacier’s extremely low-cost storage service based on object lifetimes.  As your data ages, these rules enable you to ensure that it’s automatically stored on the storage option that is most cost-effective for your needs.
+
+<div class="h2" style="padding-bottom:0px;margin-bottom:6px;">Static Website Hosting</div>
+You can host your entire static website on Amazon S3 for an inexpensive, highly available hosting solution that scales automatically to meet traffic demands. Self-hosting a highly available website that can handle peak traffic loads can be challenging and costly. With Amazon S3, you can reliably serve your traffic and handle unexpected peaks without worrying about scaling your infrastructure. Amazon S3 is designed for 99.99% availability and 99.999999999% durability, and it gives you access to the same highly scalable, reliable, and fast infrastructure that Amazon uses to run its own global network of web sites. You also benefit from pay-as-you-go pricing. You pay only for the capacity you use. Amazon S3’s website hosting solution is ideal for websites with static content, including html files, images, videos, and client-side scripts such as JavaScript. (Amazon EC2 is recommended for websites with server-side scripting and database interaction).  
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      
+    </div>      
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline" style="padding-top:6px;">    
+      
+    </div>
+    <div class="underline" style="padding-top:6px;">    
+      
+    </div>
+    <div class="underline">    
+      
+        <hr />
+        <h1 id="resources">Resources</h1>
+        <div class="yui-g">
+<div class="yui-u first" style="width:49%;">
+<div class="resources_section">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="padding_margin_zero">Developer Resources</td>
+  </tr>
+</table>
+</div>
+
+	<ul>
+		<li><a href="http://docs.amazonwebservices.com/AmazonS3/latest/gsg">Getting Started Guide</a></li>
+		<li><a href="/console">AWS Management Console</a></li>
+		<li><a href="http://s3.amazonaws.com/doc/2006-03-01/AmazonS3.wsdl">WSDL</a></li>
+		<li><a href="/documentation/s3/">Documentation</a></li>
+		<li><a href="/releasenotes/Amazon-S3">Release Notes</a></li>
+		<li><a href="/code/Amazon-S3">Sample Code &#38; Libraries</a></li>
+		<li><a href="/developertools/Amazon-S3">Developer Tools</a></li>
+		<li><a href="/articles/Amazon-S3">Articles &#38; Tutorials</a></li>
+		<li><a href="https://forums.aws.amazon.com/forum.jspa?forumID=24">Community Forum</a></li>
+	</ul>
+
+
+</div>
+
+<div class="yui-u">
+<div class="resources_section">Additional Product Information</div>
+
+	<ul>
+		<li><a href="/s3/faqs/">FAQs</a></li>
+		<li><a href="/s3-sla/" title="SLA">Amazon S3 Service Level Agreement</a></li>
+		<li><a href="/agreement/">Amazon Web Services Customer Agreement</a></li>
+		<li><a href="http://status.aws.amazon.com/">Service Health Dashboard</a></li>
+	</ul>
+
+
+<div class="resources_section mar_top_25">Related Services</div>
+
+	<ul>
+		<li><a href="/glacier/">Amazon Glacier</a></li>
+  		<li><a href="/importexport/">AWS Import/Export</a></li>
+		<li><a href="/cloudfront/">Amazon CloudFront</a></li>
+		<li><a href="/devpay/">Amazon DevPay</a></li>
+		<li><a href="/premiumsupport/">AWS Support</a></li>
+	</ul>
+
+
+</div>
+</div>
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline">    
+      
+    </div>
+    <div class="underline" style="padding-top:6px;">    
+      
+        <hr />
+        <h1 id="requirements">Amazon S3 Design Requirements</h1>
+        <p>Amazon S3 is based on the idea that quality Internet-based storage should be taken for granted. It helps free developers from worrying about how they will store their data, whether it will be safe and secure, or whether they will have enough storage available.  It frees them from the upfront costs of setting up their own storage solution as well as the ongoing costs of maintaining and scaling their storage servers. The functionality of Amazon S3 is simple and robust: Store any amount of data inexpensively and securely, while ensuring that the data will always be available when you need it. Amazon S3 enables developers to focus on innovating with data, rather than figuring out how to store it.</p>
+
+
+	<p>Amazon S3 was built to fulfill the following design requirements:</p>
+
+	<ul>
+	<li><strong>Secure:</strong> Built to provide infrastructure that allows the customer to maintain full control over who has access to their data. Customers must also be able to easily secure their data in transit and at rest.</li>
+	</ul>
+
+	<ul>
+	<li><strong>Reliable:</strong> Store data with up to 99.999999999% durability, with 99.99% availability. There can be no single points of failure. All failures must be tolerated or repaired by the system without any downtime.</li>
+	</ul>
+
+	<ul>
+	<li><strong>Scalable:</strong> Amazon S3 can scale in terms of storage, request rate, and users to support an unlimited number of web-scale applications. It uses scale as an advantage: Adding nodes to the system increases, not decreases, its availability, speed, throughput, capacity, and robustness.</li>
+	</ul>
+
+	<ul>
+	<li><strong>Fast:</strong> Amazon S3 must be fast enough to support high-performance applications. Server-side latency must be insignificant relative to Internet latency. Any performance bottlenecks can be fixed by simply adding nodes to the system.</li>
+	</ul>
+
+	<ul>
+	<li><strong>Inexpensive:</strong> Amazon S3 is built from inexpensive commodity hardware components. All hardware will eventually fail and this must not affect the overall system. It must be hardware-agnostic, so that savings can be captured as Amazon continues to drive down infrastructure costs.</li>
+	</ul>
+
+	<ul>
+	<li><strong>Simple:</strong> Building highly scalable, reliable, fast, and inexpensive storage is difficult. Doing so in a way that makes it easy to use for any application anywhere is more difficult. Amazon S3 must do both.</li>
+	</ul>
+
+
+	<p>A forcing-function for the design was that a single Amazon S3 distributed system must support the needs of both internal Amazon applications and external developers of any application. This means that it must be fast and reliable enough to run Amazon.com&#8217;s websites, while flexible enough that any developer can use it for any data storage need.</p>
+
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+      
+    </div>
+    <div class="underline" style="padding-top:6px;">    
+      
+    </div>
+    <div class="underline" style="padding-top:6px;">    
+      
+    </div>
+    <div class="underline" style="padding-top:6px;">    
+      
+        <hr />
+        <h1 id="legal">Intended Usage and Restrictions</h1>
+        <p>Your use of this service is subject to the <a href="/agreement">Amazon Web Services Customer Agreement</a></p>
+
+
+<div class="no-underline">
+
+	<p style="text-align:right;"><a href="#top"><span class="orangedk bold txt110">&uarr;</span> Top</a></p>
+
+
+</div>
+
+<div class="yui-gc"> 
+  <div  class="yui-u first">
+<br/><br/>
+
+  </div>
+<div style="align: top; background:url(//d36cz9buwru1tt.cloudfront.net/ftr_products.jpg) no-repeat; height:70px;">
+<div class="right padrt10 padtop25">
+<a href="https://portal.aws.amazon.com/gp/aws/developer/subscription/index.html?productCode=AmazonS3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <img src="//d36cz9buwru1tt.cloudfront.net/btn_signup_now.gif" title="Sign Up" alt="Sign Up" />
+
+</a>
+</div>
+</div>
+</div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="yui-b">
+  <div id="sideNav">
+    <div id="subNavA">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div id="subPageSelector" class="products">
+    <div id="subPageComboButton"></div>
+    <div class="flyout">
+      <div class="liner">
+        
+  <div class="col1">
+  <h4>Compute</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/ec2/" class="">
+      Amazon Elastic Compute Cloud <span class="norm">(EC2)</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/elasticmapreduce/" class="">
+      Amazon Elastic MapReduce
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/autoscaling/" class="">
+      Auto Scaling
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Content Delivery</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/cloudfront/" class="">
+      Amazon CloudFront
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Database</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/rds/" class="">
+      Amazon Relational Database Service <span class="norm">(RDS)</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/dynamodb/" class="">
+      Amazon DynamoDB</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/simpledb/" class="">
+      Amazon SimpleDB
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/elasticache/" class="">
+      Amazon ElastiCache </span>
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Deployment & Management</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/elasticbeanstalk/" class="">
+      AWS Elastic Beanstalk
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/cloudformation/" class="">
+      AWS CloudFormation
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>E-Commerce</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/fws/" class="">
+      Amazon Fulfillment Web Service (FWS)
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Industry-specific Clouds</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/govcloud-us/" class="">
+      AWS GovCloud (US)
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Messaging</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/sqs/" class="">
+      Amazon Simple Queue Service <span class="norm">(SQS)</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/sns/" class="">
+      Amazon Simple   Notification Service <span class="norm">(SNS)</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/ses/" class="">
+      Amazon Simple Email Service <span class="norm">(SES)</span>
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Monitoring</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/cloudwatch/" class="">
+      Amazon CloudWatch
+    </a>
+      </li>
+    
+  
+      </ul>
+</div>
+
+<div class="col2">
+  <h4>Networking</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/route53/" class="">
+      Amazon Route 53
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/vpc/" class="">
+      Amazon Virtual Private Cloud <span class="norm">(VPC)</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/elasticloadbalancing/" class="">
+      Elastic Load Balancing
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/directconnect/" class="">
+      AWS Direct Connect
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Payments &amp; Billing</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/fps/" class="">
+      Amazon Flexible Payments Service <span class="norm">(FPS)</span>
+    </a>
+      </li>
+      
+    
+      <li class="">
+        <a href="/devpay/" class="">
+      Amazon DevPay
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Storage</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/s3/" class="selected">
+      Amazon Simple Storage Service <span class="norm">(S3)</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/ebs/" class="">
+      Amazon Elastic Block Store <span class="norm">(EBS)</span>
+    </a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/importexport/" class="">
+      AWS Import/Export
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Support</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/premiumsupport/" class="">
+      AWS Premium Support
+    </a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Web Traffic</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/awis/" class="">Alexa Web Information Service</a>
+      </li>
+    
+    
+      <li class="">
+        <a href="/alexatopsites/" class="">Alexa Top Sites</a>
+      </li>
+    
+  
+      </ul>
+
+  <h4>Workforce</h4>
+  <ul class="">
+        
+    
+      <li class="">
+        <a href="/mturk/" class="">
+      Amazon Mechanical Turk
+    </a>
+      </li>
+    
+  
+      </ul>
+</div>
+
+
+      </div>
+    </div>
+    <a href="/products/" class="noScript">Products &amp; Services</a>
+  </div>
+   
+
+
+
+  
+    <div class="decoratedBox ">
+      <div class="head">
+        <h4>Amazon S3</h4>
+      </div>
+      <div class="body">
+        <div class="liner">
+          
+    <ul class="">
+        
+      
+      <li class="">
+        <a href="/s3/" class="selected">Amazon S3 Overview</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/s3/faqs/" class="">FAQs</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/s3/pricing/" class="">Pricing</a>
+      </li>
+    
+      
+      <li class="last">
+        <a href="/s3-sla/" class="">Amazon S3 SLA</a>
+      </li>
+    
+    
+      </ul>
+  
+        </div>
+      </div>
+    </div>
+    
+
+<div id="subNavB">
+  
+    <div class="decoratedBox ">
+      <div class="head">
+        <h4>Developer Resources</h4>
+      </div>
+      <div class="body">
+        <div class="liner">
+          
+    <ul class="">
+        
+      
+      <li class="">
+        <a href="http://docs.amazonwebservices.com/AmazonS3/latest/gsg/" class="">Getting Started Guide</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/console" class="">AWS Management Console</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/documentation/s3/" class="">Documentation</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/releasenotes/Amazon-S3" class="">Release Notes</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/code/Amazon-S3" class="">Sample Code &amp; Libraries</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/developertools/Amazon-S3" class="">Developer Tools</a>
+      </li>
+    
+      
+      <li class="">
+        <a href="/articles/Amazon-S3" class="">Articles &amp; Tutorials</a>
+      </li>
+    
+      
+      <li class="last">
+        <a href="https://forums.aws.amazon.com/forum.jspa?forumID=24" class="">Community Forum</a>
+      </li>
+    
+    
+      </ul>
+  
+        </div>
+      </div>
+    </div>
+    
+
+<br><br>
+
+</div>
+
+
+<div>
+  <div><span class="case_studies_header_font">Archiving Amazon S3 data to Amazon Glacier</span></div><br>
+  <p>
+    <a class="fancybox fancybox.iframe" href="https://www.youtube.com/embed/_cwpengIjkw?rel=0;hd=1;autoplay=1"><img class="hlp-border" src="//d36cz9buwru1tt.cloudfront.net/Archive_to_Glacier_2.png" alt="Video: Archiving Amazon S3 data to Amazon Glacier" title="Video: Archiving Amazon S3 data to Amazon Glacier"></a>
+  </p>
+</div>
+
+ <br><br>
+   <div class="case_studies_box">
+<div class="case_studies_header"><span class="case_studies_header_font">Not a Developer?</span></div>
+<div class="case_studies_body_text padtop10">Looking for a consumer or business storage solution?</div>
+<div class="carat_bullet"><ul style="padding-left:10px;">
+<li><a href="http://aws.amazon.com/customerapps/Amazon-S3/Consumers">Search for consumer storage solutions built on Amazon S3.</a></li>
+
+<li><a href="http://aws.amazon.com/customerapps/Amazon-S3/Businesses">Search for business storage solutions built on Amazon S3.</a></li></ul>
+
+</div>
+</div>
+
+<br><br><br>
+
+<div class="case_studies_box">
+<div class="case_studies_header"> <span class="case_studies_header_font">Find great software to complement S3</span> </div>
+<div class="txt90 padtop5 padlt13 padbot13 padrt10 grey666 lh14" style="padding-right:13px;">
+  <p>Discover tools to help you utilize and manage S3. Launch with 1-Click and pay as you go.</p>
+  <a href="http://aws.amazon.com/marketplace/ref=mkt_ste_pbox_s3"><img src="//d36cz9buwru1tt.cloudfront.net/logo-aws-marketplace.png" width="170"></a>
+</div>
+</div>
+
+<br><br><br>
+
+<div class="case_studies_box">
+<div class="case_studies_header"><span class="case_studies_header_font">Related Services</span></div>
+
+<div class="txt90 padlt13 padtop5"><img src="//d36cz9buwru1tt.cloudfront.net/orange_carat.png" alt=""> <a href="/importexport"><strong>AWS Import/Export</strong></a></div>
+<div class="txt90 padtop2 padlt20 padbot13 padrt10 grey666 lh14">Move data in and out of AWS using portable storage devices.</div>
+
+<hr>
+<div class="txt90 padlt13 padtop5"><img src="//d36cz9buwru1tt.cloudfront.net/orange_carat.png" alt=""> <a href="/cloudfront"><strong>Amazon CloudFront</strong></a></div>
+<div class="txt90 padtop2 padlt20 padbot13 padrt10 grey666 lh14">Distribute content via a global network of edge locations.</div>
+
+<hr>
+<div class="txt90 padlt13 padtop5"><img src="//d36cz9buwru1tt.cloudfront.net/orange_carat.png" alt=""> <a href="/premiumsupport"><strong>AWS Support</strong></a></div>
+<div class="txt90 padtop2 padlt20 padbot13 padrt10 grey666 lh14">Gain direct access to our technical support team.</div>
+
+<hr>
+<div class="txt90 padlt13 padtop10"><img src="//d36cz9buwru1tt.cloudfront.net/orange_carat.png" alt=""> <a href="/devpay"><strong>Amazon DevPay</strong></a></div>
+<div class="txt90 padtop2 padlt20 padbot13 padrt10 grey666 lh14">Get paid for your Amazon S3 applications.</div>
+
+</div>
+
+	<p><br>
+<br>
+<br>
+<br></p>
+
+
+<div class="case_studies_box">
+
+<div class="case_studies_header"><span class="case_studies_header_font">Interested in HIPAA-Compliance? </span></div>
+
+<div class="case_studies_body_text" style="padding-top: 10px;">To help companies building applications in the AWS cloud meet HIPAA standards, download the whitepaper:<br>
+<div class="carat_bullet"><ul style="padding-left: 0px; font-size: 108%;"><li><a href="//d36cz9buwru1tt.cloudfront.net/AWS_HIPAA_Whitepaper_Final.pdf" target="_blank">Creating HIPAA-Compliant Medical Data Applications with AWS (PDF)</a>.</li></ul>
+
+</div>
+
+Read about customers who have built HIPAA-compliant apps on AWS:<br>
+<div class="carat_bullet"><ul style="padding-left: 0px; font-size: 108%;">
+<li><a href="/solutions/case-studies/diskagent/">DiskAgent</a></li>
+<li><a href="/solutions/case-studies/tc3-health/">TC3 Health</a></li>
+<li><a href="/solutions/case-studies/medcommons/">MedCommons</a></li></ul>
+
+</div>
+</div>
+</div>
+ <br><br><br>
+
+
+
+<div id="subNavB">
+
+    <div class="decoratedBox last">
+      <div class="head">
+        <h4>Recorded On-Demand Webinar: Digital Media on the AWS Cloud</h4>
+      </div>
+      <div class="body">
+        <div class="liner">
+          
+    <div class="liner">
+
+<p>In this webinar you will learn how-to transfer your large media files quickly, scale your storage, speed up your processing jobs, and deliver your content at scale.   
+      </p>
+      <div class="learnMore">
+        <span class="carat">&gt;</span> <a href="https://event.on24.com/eventRegistration/EventLobbyServlet?target=registration.jsp&eventid=448895&sessionid=1&key=3FE60C412AD135DEEE5932658A477C51&sourcepage=register&partnerref=web_s3">Watch Now</a>
+      </div>
+    </div>
+  
+        </div>
+      </div>
+    </div>
+    
+</div>
+
+<br><br><br>
+
+
+<div id="subNavB">
+
+    <div class="decoratedBox last">
+      <div class="head">
+        <h4>Amazon S3 is Hiring!</h4>
+      </div>
+      <div class="body">
+        <div class="liner">
+          
+    <div class="liner">
+      <img src="//d36cz9buwru1tt.cloudfront.net/logo_aws.gif"
+           width="140"
+           height="53"
+           class="logo"
+           alt="AWS"/>
+<br>Come build the worlds largest cloud storage service.
+      </p>
+      <div class="learnMore">
+        <span class="carat">&gt;</span>
+        <a href="/s3-jobs/">Learn More</a>
+      </div>
+    </div>
+  
+        </div>
+      </div>
+    </div>
+    
+</div>
+</div>
+
+<div id="subNavB">
+
+    <div class="decoratedBox last">
+      <div class="head">
+        <h4>Get Started For Free</h4>
+      </div>
+      <div class="body">
+        <div class="liner">
+          
+    <div class="liner">
+
+<br>New AWS customers receive free usage tiers of compute, storage, and bandwidth every month for one year. 
+      </p>
+      <div class="learnMore">
+        <span class="carat">&gt;</span> <a href="/free">Learn More</a>
+      </div>
+    </div>
+  
+        </div>
+      </div>
+    </div>
+    
+
+<br><br>
+
+    <div class="decoratedBox ">
+      <div class="head">
+        <h4>File Storage Costs Less In The Cloud Than In-House</h4>
+      </div>
+      <div class="body">
+        <div class="liner">
+          
+    <div class="liner"><br>
+      <p>There’s a great deal of hype surrounding cloud delivery models of all flavors, with the assumption that it will usher in a new era of cheaper, better IT. But most I&O organizations struggle to compare the capital, operational, and staffing cost differences between internal and cloud storage.</p>
+      <div class="learnMore">
+        <span class="carat">&gt;</span> <a href="/whitepapers/forrester-storage-costs-less-cloud-white-paper/">Download Forrester report</a>
+      </div>
+    </div>
+  
+        </div>
+      </div>
+    </div>
+    
+</div>
+  </div>
+</div>
+
+</div>
+    <div id="ft">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="border-top: 1px solid #ccc; margin-bottom: 12px; margin-top: 10px; padding-top: 2px;">
+  <ul class="h_bar">
+    <li class="first">
+      <a href="http://aws.typepad.com/" target="_blank">AWS Blog <img src="//d36cz9buwru1tt.cloudfront.net/icon_offsite.gif" width="15" height="13" border="0" alt="This link will launch a new browser window or tab."></a>
+    </li>
+    <li><a href="http://phx.corporate-ir.net/phoenix.zhtml?c=176060&p=irol-InfoReq">Press Inquiries</a></li>
+    <li><a href="/careers/">Careers at AWS</a></li>
+    <li><a href="/contact-us/">Contact Us</a></li>
+    <li><a href="/privacy/">Privacy Policy</a></li>
+    <li><a href="/terms/">Terms of Use</a></li>
+  </ul>
+  <div class="grey666">&#169;2013, Amazon Web Services, Inc. or its affiliates. All rights reserved.</div>
+  <img src="//d36cz9buwru1tt.cloudfront.net/awsmedia/logo_an_amazon_company.gif" width="160" height="21" vspace="8">
+</div>
+</div> 
+  </div>
+
+
+  
+    
+  
+
+<script src="/js/dictionary-EN.js" type="text/javascript"></script>
+<script src="/js/pure.min.js" type="text/javascript"></script>
+<script src="/js/jquery.pricingTable.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+jQuery(function($) {
+    var simpleDirectives = {
+        '.content': {
+            'r <- config.regions': {
+                '@class+': " reg-#{r.region}",
+                'caption': function(ctx) {
+                    return ctx.context._lookup(this.region);
+                },
+                'thead .type': {
+                    'type <- config.valueColumns': {
+                        '.': function(ctx) {
+                            return ctx.context._lookup(this);
+                        }
+                    }
+                },
+                'tbody.body tr': {
+                    'tier <- r.tiers': {
+                        'td.tier': function(ctx) {
+                            return ctx.context._lookup(this.name);
+                        },
+                        'td.price': {
+                            'type <- tier.storageTypes': {
+                                '.': function(ctx) {
+                                    return ctx.context._formatCurrency.call(this);
+                                }
+                            }
+                        }
+                    }
+                },
+                'tbody.footnotes': {
+                    'fn <- r.footnotes': {
+                        'tr td': function(ctx) {
+                            return "<code>" +
+                                ctx.context._lookup(ctx.pos) +
+                                "</code> " +
+                                ctx.context._lookup(ctx.item);
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    var s3dict         = $('#s3Dictionary');
+    var simpleTemplate = $('#simplePricingTemplate');
+
+    $('#storagePricing').pricingTable({
+        model: '/s3/pricing/pricing-storage.json',
+        template: simpleTemplate,
+        dict: s3dict,
+        directives: simpleDirectives
+    });
+
+    $('#dataXferPricing').pricingTable({
+        model: '/s3/pricing/pricing-data-transfer.json',
+        template: $('#template'),
+        dict: s3dict,
+        directives: {
+            '.content': {
+                'r <- config.regions': {
+                    '@class+': " reg-#{r.region}",
+                    'caption': function(ctx) {
+                        return ctx.context._lookup(this.region);
+                    },
+                    'thead .type': {
+                        'type <- config.valueColumns': {
+                            '.': function(ctx) {
+                                return ctx.context._lookup(this);
+                            }
+                        }
+                    },
+                    'tbody.body': {
+                        'type <- r.types': {
+                            'tr.heading .type': function(ctx) {
+                                return ctx.context._lookup(this.name);
+                            },
+                            'tr.tiers': {
+                                'tier <- type.tiers': {
+                                    '.tier': function(ctx) {
+                                        return ctx.context._lookup(this.name);
+                                    },
+                                    '.price': function(ctx) {
+                                        return ctx.context._formatCurrency.call(this);
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    'tbody.footnotes': {
+                        'fn <- r.footnotes': {
+                            'tr td': function(ctx) {
+                                return "<code>" +
+                                    ctx.context._lookup(ctx.pos) +
+                                    "</code> " +
+                                    ctx.context._lookup(ctx.item);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    $('#requestPricing').pricingTable({
+        model: '/s3/pricing/pricing-requests.json',
+        template: simpleTemplate,
+        dict: s3dict,
+        directives: {
+            '.content': {
+                'r <- config.regions': {
+                    '@class+': " reg-#{r.region}",
+                    'caption': function(ctx) {
+                        return ctx.context._lookup(this.region);
+                    },
+                    'thead .type': {
+                        'type <- config.valueColumns': {
+                            '.': function(ctx) {
+                                return ctx.context._lookup(this);
+                            }
+                        }
+                    },
+                    'tbody.body tr': {
+                        'tier <- r.tiers': {
+                            'td.tier': function(ctx) {
+                                return ctx.context._lookup(this.name);
+                            },
+                            'td.price': function(ctx) {
+                                return ctx.context._formatCurrency.call(this);
+                            }
+                        }
+                    },
+                    'tbody.footnotes': {
+                        'fn <- r.footnotes': {
+                            'tr td': function(ctx) {
+                                return "<code>" +
+                                    ctx.context._lookup(ctx.pos) +
+                                    "</code> " +
+                                    ctx.context._lookup(ctx.item);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+
+<script id="simplePricingTemplate" type="text/x-html">
+  <div class="regions">
+    <div class="content">
+      <table class="tan-table">
+        <caption></caption>
+        <thead>
+          <tr class="centered">
+            <th></th>
+            <th class="type"></th>
+          </tr>
+        </thead>
+        <tbody class="body">
+          <tr>
+            <td class="tier"></td>
+            <td class="price"></td>
+          </tr>
+        </tbody>
+        <tbody class="footnotes">
+          <tr>
+            <td colspan="4">
+              <code></code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</script>
+
+<script id="template" type="text/x-html">
+  <div class="regions">
+    <div class="content">
+      <table class="tan-table">
+        <caption></caption>
+        <thead>
+          <tr class="centered">
+            <th></th>
+            <th class="type"></th>
+          </tr>
+        </thead>
+        <tbody class="body">
+          <tr class="heading">
+            <th colspan="2" class="type"></th>
+          </tr>
+          <tr class="tiers">
+            <td class="tier"></td>
+            <td class="price" style="text-align: center"></td>
+          </tr>
+        </tbody>
+        <tbody class="footnotes">
+          <tr>
+            <td colspan="3">
+              <code></code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</script>
+
+
+
+<script type="text/javascript" src="//aws-lightbox.s3.amazonaws.com/source/jquery.fancybox.js"></script><link rel="stylesheet" type="text/css" href="//aws-lightbox.s3.amazonaws.com/source/jquery.fancybox.css" media="screen"><script type="text/javascript">$(document).ready(function(){$('.fancybox').fancybox();});</script><style type="text/css">.fancybox-custom .fancybox-outer{box-shadow:0 0 50px #222;}</style>
+  
+
+  
+<!-- SiteCatalyst code version: H.25.1.
+Copyright 1996-2012 Adobe, Inc. All Rights Reserved
+More info available at http://www.omniture.com -->
+<script language="JavaScript" type="text/javascript" src="//d36cz9buwru1tt.cloudfront.net/js/sitecatalyst/s_code.min.js"></script>
+
+<script language="JavaScript" type="text/javascript"><!--
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+<script language="JavaScript" type="text/javascript"><!--
+if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+//--></script><noscript><img src="//amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.1--NS/0"
+height="1" width="1" border="0" alt="" /></noscript><!--/DO NOT REMOVE/-->
+<!-- End SiteCatalyst code version: H.25.1. -->
+</body>
+
+</html>
+
+
+
