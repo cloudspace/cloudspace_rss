@@ -9,18 +9,18 @@ development:
   reconnect: false
   database: cloudspace_rss_staging
   pool: 5
-  username: cloudspace_rss
-  password: 29dkgj298JD9
+  username: root
+  password: 8DF892JAjdfj2903ijV3lsdf2
   host: localhost
 
 test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: cloudspace_rss_staging
+  database: cloudspace_rss_testing
   pool: 5
-  username: cloudspace_rss
-  password: 29dkgj298JD9
+  username: root
+  password: 8DF892JAjdfj2903ijV3lsdf2
   host: localhost
 
 
@@ -45,8 +45,8 @@ staging:
   reconnect: false
   database: cloudspace_rss_staging
   pool: 5
-  username: cloudspace_rss
-  password: 29dkgj298JD9
+  username: root
+  password: 8DF892JAjdfj2903ijV3lsdf2
   host: localhost
 
 production:
@@ -55,6 +55,6 @@ production:
   reconnect: false
   database: cloudspace_rss_production
   pool: 5
-  username: cloudspace_rss
-  password: 29dkgj298JD9
+  username: root
+  password: 8DF892JAjdfj2903ijV3lsdf2
   host: localhost

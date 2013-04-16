@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'sqlite3'
 gem 'fastimage'
 gem 'whenever', :require => false
+gem 'socksify'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

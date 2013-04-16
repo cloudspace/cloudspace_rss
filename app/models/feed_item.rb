@@ -1,5 +1,5 @@
 class FeedItem < ActiveRecord::Base
-  attr_accessible :description, :image, :name, :url, :feed_id, :readability_content, :readability_image
+  attr_accessible :description, :image, :name, :url, :feed_id, :readability_content, :readability_image, :published
   validates_presence_of :name, :url
   belongs_to :feed
   

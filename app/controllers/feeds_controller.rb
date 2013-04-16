@@ -3,6 +3,9 @@ require 'readability'
 require 'open-uri'
 require 'thread'
 
+require 'socksify'
+TCPSocket::socks_server = "10.0.1.139"
+TCPSocket::socks_port = 8889
 
 class FeedsController < ApplicationController
   # GET /feeds
@@ -17,62 +20,88 @@ class FeedsController < ApplicationController
         print "found feed"
       end
 
-      if (feed.feed_items.count == 0)
-        #Parse the feed, get the feeditems
-        feedContent = Feedzirra::Feed.fetch_and_parse(feed.url)
-        
-        # Create a workers array and mutex for handling multple threads
-        workers = Array.new()
-        mutex = Mutex.new
+      #Parse the feed, get the feeditems
+      feedContent = Feedzirra::Feed.fetch_and_parse(feed.url)
+      
+      # Create a workers array and mutex for handling multple threads
+      mutex = Mutex.new
+      threads = []
+      processed_entries = []
 
-        for entry in feedContent.entries
-          # Spawn new theads to download and parse the documents in paralell
-          thread = Thread.new { 
-            # Get readability content
-            readability_content = nil
-            readability_image = nil
-            
-            begin
-              source = open(entry.url).read
-              rbody = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
+      existing_entry_urls = feed.feed_items.collect{|existing_entry| existing_entry.url}
 
-              readability_content = rbody.content
-              readability_image = rbody.images[0]
-            rescue => e
-              # if something went wrong with getting the content just ignore it
-            end
+      for feedEntry in feedContent.entries
+        # Skip entries that have already been processed
+
+        if existing_entry_urls.include? feedEntry.url
+          puts "Entry " + feedEntry.url + " already exists for this feed"
+          next
+        end
+
+        threads << Thread.new(feedEntry) { |entry|
+
+          readability_content = nil
+          readability_image = nil
           
-            # Synchronize theads over the critical section
-            mutex.synchronize do
-              # Create feed item
-              newItem = FeedItem.create(
-                :name=>entry.title,
-                :url=>entry.url,
-                :description=>entry.summary,
-                :feed_id=>feed.id,
-                :readability_content => readability_content,
-                :readability_image => readability_image,
-                )
-            end
-          }
+          mutex.synchronize do
+            puts "Loading " + entry.url
+          end
 
-          workers << thread
-        end
+          begin
+            source = open(entry.url).read
+            rbody = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
 
-        # Wait for worker threads to finish
-        for worker in workers
-          worker.join()
-        end
+            readability_content = rbody.content
+            readability_image = rbody.images[0]
+          rescue => e
+            # if something went wrong with getting the content just ignore it
+          end
+
+           mutex.synchronize do
+            puts "Finished " + entry.url
+          end
         
-        requested_items = feed.feed_items
-        
-      else
-        requested_items = FeedItem.with_feed_url(params["url"])
+          # Synchronize theads over the critical section
+          mutex.synchronize do
+            processed_entries.push ({
+              :entry => entry,
+              :readability_content => readability_content,
+              :readability_image => readability_image
+            })
+          end
+
+        }
       end
+
+      # Wait for worker threads to finish
+      threads.each(&:join)
+      
+      # Create the active record objects
+      # do this here because on the worker threads it will spawn new rails instances for each entry and 
+      # take forever
+      for e in processed_entries
+        entry = e[:entry]
+
+        # Create feed item
+        newItem = FeedItem.create(
+          :name=>entry.title,
+          :url=>entry.url,
+          :description=>entry.summary,
+          :feed_id=>feed.id,
+          :readability_content => e[:readability_content],
+          :readability_image => e[:readability_image],
+          :published => entry.published
+          )
+      end
+      
+      requested_items = feed.feed_items
+
+      # Limit item count
       
       if params.has_key?(:limit)
         requested_items = requested_items.limit(params[:limit])
       end
+
       if params.has_key?(:offset)
           requested_items = requested_items.offset(params[:offset])
       end
