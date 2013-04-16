@@ -3,9 +3,9 @@ require 'readability'
 require 'open-uri'
 require 'thread'
 
-require 'socksify'
-TCPSocket::socks_server = "10.0.1.139"
-TCPSocket::socks_port = 8889
+#require 'socksify'
+#TCPSocket::socks_server = "10.0.1.139"
+#TCPSocket::socks_port = 8889
 
 class FeedsController < ApplicationController
   # GET /feeds
