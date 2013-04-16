@@ -5,12 +5,14 @@ gem 'nokogiri', '1.5.9'
 gem 'feedzirra'
 gem 'ruby-readability'
 gem 'link_thumbnailer'
+gem 'mini_magick'
 gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'sqlite3'
 gem 'fastimage'
 gem 'whenever', :require => false
 gem 'socksify'
+gem 'aws-sdk'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
