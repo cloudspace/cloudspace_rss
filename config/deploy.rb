@@ -14,7 +14,8 @@ default_run_options[:pty] = true
 set :deploy_to, "/srv/www/#{application}"
 #set :deploy_via, :remote_cache
 set :rails_env, 'production'
-set :bundle_flags, "--deployment --quiet --binstubs=sbin"
+#set :bundle_flags, "--deployment --quiet --binstubs=sbin"
+set :bundle_flags, "--without deployment"
 
 namespace :deploy do
   task :start do
