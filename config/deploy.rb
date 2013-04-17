@@ -7,12 +7,12 @@ require 'capistrano/ext/multistage'
 set :application, "rss.cloudspace.com"
 set :user, "root"
 set :group, "root"
-set :ssh_options, { :forward_agent => true }
-default_run_options[:pty] = true
 set :scm, :git
 set :repository, "git@github.com:cloudspace/cloudspace_rss.git"
+set :ssh_options, { :forward_agent => true }
+default_run_options[:pty] = true
 set :deploy_to, "/srv/www/#{application}"
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :rails_env, 'production'
 set :bundle_flags, "--deployment --quiet --binstubs=sbin"
 
