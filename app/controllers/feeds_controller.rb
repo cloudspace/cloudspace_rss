@@ -7,7 +7,7 @@ require 'thread'
 #TCPSocket::socks_server = "10.0.1.139"
 #TCPSocket::socks_port = 8889
 
-class FeedsController < ApplicationController
+class FeedsController < ApplicationController  
   # GET /feeds
   def index 
     if params.has_key?(:url)
@@ -42,7 +42,8 @@ class FeedsController < ApplicationController
 
           @readability_content = nil
           @readability_image = nil
-          
+          @thumbnail = nil
+
           mutex.synchronize do
             puts "Loading " + entry.url
           end
@@ -53,9 +54,14 @@ class FeedsController < ApplicationController
 
             @readability_content = rbody.content
             @readability_image = rbody.images[0]
-
+            
+            if @readability_image
+              @thumb_image = MiniMagick::Image.open(@readability_image)
+              @thumbnail = FeedsHelper::upload_thumbnail_to_aws(FeedsHelper::resize_and_crop(@thumb_image, 88), 'cloudspace_rss_thumbs')
+            end
           rescue => e
             # if something went wrong with getting the content just ignore it
+            puts e
           end
 
            mutex.synchronize do
@@ -67,7 +73,8 @@ class FeedsController < ApplicationController
             processed_entries.push ({
               :entry => entry,
               :readability_content => @readability_content,
-              :readability_image => @readability_image
+              :readability_image => @readability_image,
+              :image => @thumbnail
             })
           end
 
@@ -96,6 +103,7 @@ class FeedsController < ApplicationController
           :feed_id=>feed.id,
           :readability_content => @html_content,
           :readability_image => @readability_image,
+          :image => e[:image],
           :published => entry.published
           )
       end

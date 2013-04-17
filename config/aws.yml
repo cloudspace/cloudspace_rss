@@ -1,0 +1,9 @@
+production:
+  bucket: cloudspace_rss_thumbs
+  access_key_id: AKIAIYPASLOQL5SV4J4Q
+  secret_access_key: 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
+
+development:
+  bucket: cloudspace_rss_thumbs
+  access_key_id: AKIAIYPASLOQL5SV4J4Q
+  secret_access_key: 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
