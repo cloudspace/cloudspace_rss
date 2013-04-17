@@ -1,0 +1,43 @@
+%html{:xmlns => "http://www.w3.org/1999/xhtml", :"xmlns:og" => "http://ogp.me/ns#", :"xmlns:fb" => "https://www.facebook.com/2008/fbml"}
+  %head
+    %meta{:name => "viewport", :content => "width=device-width"}
+    :css
+      body {
+        font-family: TrebuchetMS;
+        font-size: 13px;
+        
+        color: #444444;
+      }
+      
+      .cloudspacious_content img {
+        width: 280px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding:8px;
+        border:solid;
+        border-color: #dddddd;
+        border-width: 2px;
+        background-color:white;
+        margin: 15px 0px 15px 0px;
+      }
+      
+      .cloudspacious_content h1
+      {
+        margin: 15px 10px 15px 10px;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+      }
+      
+      .cloudspacious_content {
+        line-height: 18px;
+      }
+  %body
+    .cloudspacious_content
+      %h1
+        =@entry_name
+      - if @readability_image
+        %img{:src => @readability_image}
+      %div
+        =@readability_content.html_safe

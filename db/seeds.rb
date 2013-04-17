@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 feeds = Feed.create([
+          {name: 'Engadget',        url: 'http://www.engadget.com/rss.xml'},
+          {name: 'The Verge',       url: 'http://www.theverge.com/rss/index.xml'},
           {name: 'CNN Top Stories', url: 'http://rss.cnn.com/rss/cnn_topstories.rss'},
           {name: 'CNN World',       url: 'http://rss.cnn.com/rss/cnn_world.rss'},
           {name: 'CNN U.S.',        url: 'http://rss.cnn.com/rss/cnn_us.rss'},

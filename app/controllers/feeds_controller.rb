@@ -40,8 +40,8 @@ class FeedsController < ApplicationController
 
         threads << Thread.new(feedEntry) { |entry|
 
-          readability_content = nil
-          readability_image = nil
+          @readability_content = nil
+          @readability_image = nil
           
           mutex.synchronize do
             puts "Loading " + entry.url
@@ -51,8 +51,9 @@ class FeedsController < ApplicationController
             source = open(entry.url).read
             rbody = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
 
-            readability_content = rbody.content
-            readability_image = rbody.images[0]
+            @readability_content = rbody.content
+            @readability_image = rbody.images[0]
+
           rescue => e
             # if something went wrong with getting the content just ignore it
           end
@@ -65,8 +66,8 @@ class FeedsController < ApplicationController
           mutex.synchronize do
             processed_entries.push ({
               :entry => entry,
-              :readability_content => readability_content,
-              :readability_image => readability_image
+              :readability_content => @readability_content,
+              :readability_image => @readability_image
             })
           end
 
@@ -82,19 +83,24 @@ class FeedsController < ApplicationController
       for e in processed_entries
         entry = e[:entry]
 
+        @entry_name = entry.title
+        @readability_image = e[:readability_image]
+        @readability_content = e[:readability_content]
+        @html_content = self.render_to_string "layouts/feeditem", :layout => false
+
         # Create feed item
         newItem = FeedItem.create(
           :name=>entry.title,
           :url=>entry.url,
           :description=>entry.summary,
           :feed_id=>feed.id,
-          :readability_content => e[:readability_content],
-          :readability_image => e[:readability_image],
+          :readability_content => @html_content,
+          :readability_image => @readability_image,
           :published => entry.published
           )
       end
-      
-      requested_items = feed.feed_items
+
+      requested_items = feed.feed_items.reload
 
       # Limit item count
       

@@ -2,10 +2,10 @@ set :stages, %w(production staging)
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
-set :application, "cloudspace_rss"
+set :application, "rss.cloudspace.com"
 set :user, "root"
 set :group, "root"
-
+set :ssh_options, { :forward_agent => true }
 set :scm, :git
 set :repository, "git@github.com:cloudspace/cloudspace_rss.git"
 set :deploy_to, "/srv/www/#{application}"
@@ -14,15 +14,15 @@ set :rails_env, 'production'
 
 namespace :deploy do
   task :start do
-    run "cd #{current_release} && bundle exec unicorn -E #{rails_env} -c /etc/unicorn/cloudspace_rss.rb -D"
+    run "cd #{current_release} && bundle exec unicorn -E #{rails_env} -c /etc/unicorn/#{application}.rb -D"
   end
 
   task :stop do
-    run "kill -QUIT $(cat /var/run/cloudspace_rss_unicorn.pid)"
+    run "kill -QUIT $(cat /var/run/#{application}_unicorn.pid)"
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "kill -USR2 $(cat /var/run/cloudspace_rss_unicorn.pid)"
+    run "kill -USR2 $(cat /var/run/#{application}_unicorn.pid)"
   end
 
   namespace :db do
