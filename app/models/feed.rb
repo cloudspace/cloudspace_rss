@@ -26,8 +26,10 @@ class Feed < ActiveRecord::Base
         puts "Entry " + feedEntry.url + " already exists for this feed"
         next
       end
+      
+      f_record = FeedItem.new
 
-      threads << Thread.new(feedEntry) { |entry|
+      threads << Thread.new(feedEntry, f_record) { |entry, feed_record|
 
         @readability_content = nil
         @readability_image = nil
@@ -57,48 +59,36 @@ class Feed < ActiveRecord::Base
           puts "Finished " + entry.url
         end
       
+      
         # Synchronize theads over the critical section
         mutex.synchronize do
-          processed_entries.push ({
-            :entry => entry,
-            :readability_content => @readability_content,
-            :readability_image => @readability_image,
-            :image => @thumbnail
-          })
+          begin
+            puts "Starting record save for " + entry.title
+            feed_record.name = entry.title
+            feed_record.url = entry.url
+            feed_record.description = entry.summary
+            feed_record.feed_id = self.id
+            puts "Starting render for " +entry.title
+            feed_record.readability_content = ac.render_to_string(
+              :template=>"layouts/feeditem",
+              :locals=>{
+                :readability_image=>@readability_image,
+                :readability_content=>@readability_content,
+                :entry_name=>entry.title
+              }
+            )
+            feed_record.readability_image = @readability_image
+            feed_record.image = @thumbnail
+            feed_record.published = entry.published
+            feed_record.save
+          
+            puts "Finished saving feed_record for " + entry.title
+          rescue Exception => e
+            puts e
+          end
         end
 
       }
-    end
-
-    # Wait for worker threads to finish
-    threads.each(&:join)
-    
-    # Create the active record objects
-    # do this here because on the worker threads it will spawn new rails instances for each entry and 
-    # take forever
-    for e in processed_entries
-      entry = e[:entry]
-
-      @html_content = ac.render_to_string(
-        :template=>"layouts/feeditem",
-        :locals=>{
-          :readability_image=>e[:readability_image],
-          :readability_content=>e[:readability_content],
-          :entry_name=>entry.title
-        }
-      )
-
-      # Create feed item
-      newItem = FeedItem.create(
-        :name=>entry.title,
-        :url=>entry.url,
-        :description=>entry.summary,
-        :feed_id=>self.id,
-        :readability_content => @html_content,
-        :readability_image => e[:readability_image],
-        :image => e[:image],
-        :published => entry.published
-        )
     end
     
   end
