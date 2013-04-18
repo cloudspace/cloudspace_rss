@@ -4,5 +4,5 @@
 # 
 every 1.hour do
    #Update feeditem records
-   rake "parse:feeds"
+   rake "feeds:parse"
 end
