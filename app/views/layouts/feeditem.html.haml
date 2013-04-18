@@ -36,8 +36,8 @@
   %body
     .cloudspacious_content
       %h1
-        =@entry_name
-      - if @readability_image
-        %img{:src => @readability_image}
+        =entry_name
+      - if readability_image
+        %img{:src => readability_image}
       %div
-        =@readability_content.html_safe
+        =readability_content.html_safe
