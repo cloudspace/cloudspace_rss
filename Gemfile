@@ -16,6 +16,11 @@ gem 'rmagick'
 gem 'haml'
 gem 'aws-sdk'
 
+#activeadmin requirements
+gem 'activeadmin'
+gem "meta_search",    '>= 1.1.0.pre'
+
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
