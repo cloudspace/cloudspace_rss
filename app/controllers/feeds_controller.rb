@@ -40,9 +40,9 @@ class FeedsController < ApplicationController
 
         threads << Thread.new(feedEntry) { |entry|
 
-          @readability_content = nil
-          @readability_image = nil
-          @thumbnail = nil
+          readability_content = nil
+          readability_image = nil
+          thumbnail = nil
 
           mutex.synchronize do
             puts "Loading " + entry.url
@@ -52,12 +52,12 @@ class FeedsController < ApplicationController
             source = open(entry.url).read
             rbody = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
 
-            @readability_content = rbody.content
-            @readability_image = rbody.images[0]
+            readability_content = rbody.content
+            readability_image = rbody.images[0]
             
-            if @readability_image
-              @thumb_image = MiniMagick::Image.open(@readability_image)
-              @thumbnail = FeedsHelper::upload_thumbnail_to_aws(FeedsHelper::resize_and_crop(@thumb_image, 88), 'cloudspace_rss_thumbs')
+            if readability_image
+              thumb_image = MiniMagick::Image.open(readability_image)
+              thumbnail = FeedsHelper::upload_thumbnail_to_aws(FeedsHelper::resize_and_crop(thumb_image, 88), 'cloudspace_rss_thumbs')
             end
           rescue => e
             # if something went wrong with getting the content just ignore it
@@ -72,9 +72,9 @@ class FeedsController < ApplicationController
           mutex.synchronize do
             processed_entries.push ({
               :entry => entry,
-              :readability_content => @readability_content,
-              :readability_image => @readability_image,
-              :image => @thumbnail
+              :readability_content => readability_content,
+              :readability_image => readability_image,
+              :image => thumbnail
             })
           end
 
@@ -94,7 +94,7 @@ class FeedsController < ApplicationController
         @readability_image = e[:readability_image]
         @readability_content = e[:readability_content]
         @html_content = self.render_to_string "layouts/feeditem", :layout => false
-
+        
         # Create feed item
         newItem = FeedItem.create(
           :name=>entry.title,
@@ -145,6 +145,10 @@ class FeedsController < ApplicationController
 
   def show
     render :json=>Feed.find(params[:id])
+  end
+
+  def recommended
+    return render :json=> matching_feeds = {:feeds => Feed.where(['name IS NOT NULL']).sample(2)}
   end
   
   # # POST /feeds
