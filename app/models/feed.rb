@@ -59,7 +59,8 @@ class Feed < ActiveRecord::Base
           puts "Finished " + entry.url
         end
       
-      
+        readability_content = "" if readability_content == nil
+
         # Synchronize theads over the critical section
         mutex.synchronize do
           puts "Starting record save for " + entry.title
