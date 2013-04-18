@@ -39,7 +39,7 @@ class FeedsController < ApplicationController
 
 
     if params.has_key?(:name)
-      requested_items = Feed.where(['name like ?', "#{params[:name]}%"])
+      requested_items = Feed.where(['name like ?', "%#{params[:name]}%"])
     else
       requested_items = Feed.where(['name IS NOT NULL'])
     end
@@ -59,6 +59,10 @@ class FeedsController < ApplicationController
 
   def show
     render :json=>Feed.find(params[:id])
+  end
+
+  def recommended
+    return render :json=> matching_feeds = {:feeds => Feed.where(['name IS NOT NULL']).sample(2)}
   end
   
   # # POST /feeds
