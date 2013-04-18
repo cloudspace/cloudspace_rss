@@ -76,6 +76,8 @@ namespace :bundler do
   end
 end
 
+
+set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
 after "deploy:update", "whenever:update_crontab"
 
