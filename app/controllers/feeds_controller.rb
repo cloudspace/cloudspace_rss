@@ -39,9 +39,9 @@ class FeedsController < ApplicationController
 
 
     if params.has_key?(:name)
-      requested_items = Feed.where(['name like ?', "%#{params[:name]}%"])
+      requested_items = Feed.where("name like ?", "%#{params[:name]}%")
     else
-      requested_items = Feed.where(['name IS NOT NULL'])
+      requested_items = Feed.where("feeds.default=? AND name IS NOT NULL", true)
     end
     
     if params.has_key?(:limit)
