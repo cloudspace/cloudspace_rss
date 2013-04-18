@@ -76,6 +76,8 @@ namespace :bundler do
   end
 end
 
+require "whenever/capistrano"
+after "deploy:update", "whenever:update_crontab"
 
 after "deploy:rollback:revision", "bundler:install"
 after "deploy:update_code", "bundler:bundle_new_release"
