@@ -58,8 +58,6 @@ class Feed < ActiveRecord::Base
          mutex.synchronize do
           puts "Finished " + entry.url
         end
-      
-        readability_content = "" if readability_content == nil
 
         # Synchronize theads over the critical section
         mutex.synchronize do
@@ -74,7 +72,8 @@ class Feed < ActiveRecord::Base
             :locals=>{
               :readability_image=>readability_image,
               :readability_content=>readability_content,
-              :entry_name=>entry.title
+              :entry_summary=>entry.summary,
+              :entry_name=>entry.title,
             }
           )
           feed_record.readability_image = readability_image

@@ -40,4 +40,7 @@
       - if readability_image
         %img{:src => readability_image}
       %div
-        =readability_content.html_safe
+        - if readability_content
+          =readability_content.html_safe
+        - else
+          =entry_summary
