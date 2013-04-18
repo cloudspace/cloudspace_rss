@@ -77,6 +77,10 @@ namespace :bundler do
 end
 
 
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+after "deploy:update", "whenever:update_crontab"
+
 after "deploy:rollback:revision", "bundler:install"
 after "deploy:update_code", "bundler:bundle_new_release"
 after "deploy:update_code", "deploy:db:migrate"

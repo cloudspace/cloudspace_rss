@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 feeds = Feed.create([
   {name: 'Cloudspace Blog',         url: 'http://feeds.feedburner.com/TheCloudspaceBlog'},
   {name: 'Engadget',                url: 'http://www.engadget.com/rss.xml'},
@@ -22,11 +15,71 @@ feeds = Feed.create([
   {name: 'duss005.com',             url: 'http://feeds.feedburner.com/duss005'},
   {name: 'Ars Technica',            url: 'http://feeds.arstechnica.com/arstechnica/index/'},
   {name: 'Coloring for Grown-ups',  url: 'http://coloringforgrownups.com/rss'},
+  {name: 'Crawling Road Blog',      url: 'http://crawlingroad.com/blog/feed/'},
+  {name: 'Downtown O-Town',         url: 'http://downtown-otown.com/feed/'},
+  {name: 'MyFloridaCFO.com CFO Jeff Atwater', url: 'http://www.myfloridacfo.com/podcasts/xml/podcast.xml'},
+  {name: 'Orlando Business News - Local Orlando News | The Orlando Business Journal', url: 'http://feeds.bizjournals.com/bizj_orlando'},
+  {name: 'SURVIVING IN ARGENTINA', url: 'http://ferfal.blogspot.com/feeds/posts/default'},
+  {name: 'the ORLANDOAN - Events and Things to Do in Orlando', url: 'http://www.theorlandoan.com/feeds/posts/default'},
+  {name: 'American Thinker', url: 'http://www.americanthinker.com/index.xml'},
+  {name: 'Bicycling is Better', url: 'http://mighkwilson.com/feed/'},
+  {name: 'Breitbart Feed', url: 'http://feeds.feedburner.com/BreitbartFeed'},
+  {name: 'Conservative Black Chick', url: 'http://conservativeblackchick.com/blog/feed/'},
+  {name: 'Drudge Report Feed', url: 'http://feeds.feedburner.com/DrudgeReportFeed'},
+  {name: 'Guns Save Lives', url: 'http://gunssavelives.net/feed/'},
+  {name: 'Liz Mair Blog', url: 'http://www.lizmair.com/LizMair_blogrss.xml'},
+  {name: 'Michelle Malkin', url: 'http://feeds.feedburner.com/michellemalkin/posts'},
+  {name: 'Mr. Money Mustache', url: 'http://feeds.feedburner.com/MrMoneyMustache'},
+  {name: 'Paul Krugman', url: 'http://krugman.blogs.nytimes.com/feed/'},
+  {name: 'Power Line', url: 'http://feeds.powerlineblog.com/powerlineblog/livefeed'},
+  {name: 'Reason.com', url: 'http://feeds.feedburner.com/reason/Articles'},
+  {name: 'Tenth Amendment Center Blog', url: 'http://blog.tenthamendmentcenter.com/feed/'},
+  {name: 'The Art of Manliness', url: 'http://feeds2.feedburner.com/TheArtOfManliness'},
+  {name: 'The Last Psychiatrist', url: 'http://thelastpsychiatrist.com/atom.xml'},
+  {name: 'The New Shooter Podcast', url: 'http://newshooterpodcast.com/feed/'},
+  {name: 'TheDailyCity.com | Orlando\'s Concierge', url: 'http://www.thedailycity.com/feeds/posts/default'},
+  {name: 'Zero Hedge', url: 'http://feeds.feedburner.com/zerohedge/feed'},
+  {name: 'airforcetimes.com', url: 'http://www.airforcetimes.com/section/careers&amp;template=rss_gd'},
+  {name: 'airforcetimes.com', url: 'http://www.airforcetimes.com/section/offduty&amp;template=rss_gd'},
+  {name: 'airforcetimes.com', url: 'http://www.airforcetimes.com/section/edu&amp;template=rss_gd'},
+  {name: 'airforcetimes.com', url: 'http://www.airforcetimes.com/section/news&amp;template=rss_gd'},
+  {name: 'airforcetimes.com', url: 'http://www.airforcetimes.com/section/onmil&amp;template=rss_gd'},
+  {name: 'airforcetimes.com', url: 'http://www.airforcetimes.com/section/jobs&amp;template=rss_gd'},
+  {name: 'airforcetimes.com', url: 'http://www.airforcetimes.com/section/benefits&amp;template=rss_gd'},
+  {name: 'RealClearDefense - Homepage', url: 'http://www.realcleardefense.com/index.xml'},
+  {name: 'Small Wars Council', url: 'http://council.smallwarsjournal.com/external.php'},
+  {name: 'Small Wars Journal', url: 'http://smallwarsjournal.com/rss'},
+  {name: 'Small Wars Journal Articles', url: 'http://smallwarsjournal.com/rss/articles'},
+  {name: 'SWJ Blog', url: 'http://smallwarsjournal.com/rss/blogs'},
+  {name: 'Alestic.com', url: 'http://feeds.alestic.com/alestic'},
+  {name: 'Amazon Web Services Blog', url: 'http://aws.typepad.com/aws/atom.xml'},
+  {name: 'AWS Mobile Blog', url: 'http://mobile.awsblog.com/blog/feed/recentPosts.rss'},
+  {name: 'AWS Ruby Blog', url: 'http://ruby.awsblog.com/blog/feed/recentPosts.rss'},
+  {name: 'Boxed Ice Blog', url: 'http://blog.boxedice.com/feed/'},
+  {name: 'Cloudspace | Blog', url: 'http://www.cloudspace.com/blog/feed/'},
+  {name: 'Code as Craft', url: 'http://codeascraft.etsy.com/feed/'},
+  {name: 'Coding Horror', url: 'http://feeds.feedburner.com/codinghorror/'},
+  {name: 'The Netflix Tech Blog', url: 'http://techblog.netflix.com/feeds/posts/default'},
+  {name: 'The Nubby Admin', url: 'http://thenubbyadmin.com/feed/'},
+  {name: 'Amazon.com Gold Box Deals', url: 'http://rssfeeds.s3.amazonaws.com/goldbox'},
+  {name: 'dealnews - Today\'s Edition', url: 'http://s1.dlnws.com/dealnews/rss/todays-edition.xml'},
+  {name: 'gun-deals.com', url: 'http://gun-deals.com/rss.php'},
+  {name: 'RSS Feed for Gearxs Daily Deal', url: 'http://www.gearxs.com/rss/gearxs.rss'},
+  {name: 'Slick Guns', url: 'http://slickguns.com/rss.xml'},
+  {name: 'SlickDeals.net', url: 'http://feeds.feedburner.com/SlickdealsnetFP'},
+  {name: 'Woot', url: 'http://woot.com/blog/feed.rss'},
+  {name: 'Achewood', url: 'http://achewood.com/rss.php'},
+  {name: 'chainsawsuit by kris straub', url: 'http://chainsawsuit.com/feed'},
+  {name: 'Eat That Toast!', url: 'http://eatthattoast.com/feed/'},
+  {name: 'Explosm.net', url: 'http://feeds.feedburner.com/Explosm'},
+  {name: 'garfield minus garfield', url: 'http://garfieldminusgarfield.net/rss'},
+  {name: 'Gun Show ~ ~ ~ ~', url: 'http://www.rsspect.com/rss/gunshowcomic.xml'},
+  {name: 'Married To The Sea', url: 'http://www.marriedtothesea.com/rss/rss.php'},
+  {name: 'Natalie Dee', url: 'http://www.nataliedee.com/rss/rss.php'},
+  {name: 'Nedroid Picture Diary 2', url: 'http://nedroid.com/feed/'},
+  {name: 'Pointless Conversations', url: 'http://www.pointlessconversations.com/rss.xml'},
+  {name: 'The Duffel Blog', url: 'http://feeds.feedburner.com/duffelblog'},
+  {name: 'The Perry Bible Fellowship', url: 'http://pbfcomics.com/feed/feed.xml'},
+  {name: 'The Perry Bible Fellowship', url: 'http://www.pbfcomics.sciesnet.net/feed/feed.xml'},
+  {name: 'Three Word Phrase', url: 'http://www.threewordphrase.com/rss.xml'},
 ])
-
-
-
-
-
-
-
