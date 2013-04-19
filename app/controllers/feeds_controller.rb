@@ -62,7 +62,7 @@ class FeedsController < ApplicationController
   end
 
   def recommended
-    return render :json=> matching_feeds = {:feeds => Feed.where(['name IS NOT NULL']).sample(2)}
+    return render :json=> matching_feeds = {:feeds => Feed.where('name IS NOT NULL').sample(2)}
   end
   
   # # POST /feeds

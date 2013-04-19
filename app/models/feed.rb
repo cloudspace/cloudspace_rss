@@ -77,7 +77,7 @@ class Feed < ActiveRecord::Base
             }
           )
           feed_record.readability_image = readability_image
-          feed_record.image = @thumbnail
+          feed_record.image = thumbnail
           feed_record.published = entry.published
           feed_record.save
       

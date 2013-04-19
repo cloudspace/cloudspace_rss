@@ -1,13 +1,42 @@
 class FeedItemsController < ApplicationController
   # GET /feed_items
   def index    
-    if params.has_key?(:feed_id)
-      feed_items = FeedItem.where('feed_id=?', params[:feed_id])
-    else
-      feed_items = FeedItem.all
+    if params.has_key?(:feed_url) and params.has_key?(:item_url)
+      feed = Feed.where('url=?', params[:feed_url])[0]
+      item = FeedItem.where('url=? and feed_id=?', params[:item_url], feed.id)[0]
+
+      if(item and not item.readability_content)
+        
+        source = open(item.url).read
+        rbody = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
+
+        readability_content = rbody.content
+        readability_image = rbody.images[0]
+        entry_summary = item.description
+        entry_name = item.name
+          
+        if readability_image
+          thumb_image = MiniMagick::Image.open(readability_image)
+          thumbnail = FeedsHelper::upload_thumbnail_to_aws(FeedsHelper::resize_and_crop(thumb_image, 88), 'cloudspace_rss_thumbs')
+        end
+        
+        item.readability_content = self.render_to_string( :template=>"layouts/feeditem",
+          :locals=> {
+            :readability_content=> readability_content,
+            :readability_image=> readability_image,
+            :entry_summary=> entry_summary,
+            :entry_name=> entry_name
+          })
+        item.readability_image = readability_image
+        item.image = thumbnail
+        
+        item.save
+      end
+      
+      render :json=> item
     end
     
-    render :json=> feed_items
+    
   end
   
   # GET /feed_items/:id
