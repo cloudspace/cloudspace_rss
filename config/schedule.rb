@@ -1,8 +1,4 @@
-# every 1.day do
-#   runner "FeedItem.purge_old_records"
+# every 1.hour do
+#    #Update feeditem records
+#    rake "feeds:parse"
 # end
-# 
-every 1.hour do
-   #Update feeditem records
-   rake "feeds:parse"
-end

@@ -16,6 +16,7 @@ gem 'socksify'
 gem 'rmagick'
 gem 'haml'
 gem 'aws-sdk'
+gem 'memcached'
 
 #activeadmin requirements
 gem 'activeadmin'

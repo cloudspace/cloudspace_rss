@@ -1,3 +1,8 @@
+require 'readability'
+require 'debugger'
+require 'memcached'
+$cache = Memcached.new("localhost:11211")
+
 class FeedItemsController < ApplicationController
   # GET /feed_items
   def index    
@@ -35,10 +40,68 @@ class FeedItemsController < ApplicationController
       
       render :json=> item
     end
-    
-    
   end
-  
+
+  # Returns the s3 link to the appropriate thumbnail
+  # Generate the thumbnail if it doesn't exist
+  def thumbnail
+    feedItem = FeedItem.where("id = ?", params[:id]).limit(1).first rescue nil
+    
+    # 33.33.33.107:3000/feed_items/242/thumbnail
+
+    if (feedItem)
+      # If a readbility image exists but no thumbnail has been generated, generate one and upload it
+      if !feedItem.image || true
+        begin
+          puts "Finding thumbnail for " + feedItem.url
+
+          # Check feed description for images before anything else
+          doc = Nokogiri::HTML(feedItem.description)
+          
+          summaryImages = doc.xpath("//img/@src")
+          if !summaryImages.empty?
+            summaryImage = summaryImages.first.value
+            puts summaryImage
+                # end
+
+                # #summaryReadability = Readability::Document.new(feedItem.description, :tags => %w[img], :attributes => %w[src], :remove_empty_nodes => true)
+                # #summaryReadabilityImage = summaryReadability.images[0]
+
+                # if (summaryImage)
+            begin
+              cachedResult = $cache.get summaryImage
+              feedItem.image = cachedResult
+
+            rescue ::Memcached::NotFound
+              puts "Generating and uploading thumbnail for " + feedItem.url
+              feedItem.readability_image = summaryImage
+
+              thumbImage = FeedsHelper::resize_and_crop(MiniMagick::Image.open(feedItem.readability_image), 88)
+              thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')  
+
+              feedItem.image = thumbnailURL
+              feedItem.save
+
+              $cache.set summaryImage, thumbnailURL
+            end
+          end
+        rescue => e
+          puts 'ERROR' + e.to_s
+          # Ignore errors
+        end
+      end
+
+      # Redirect to the thumbnail if it exists
+      if feedItem.image
+        redirect_to feedItem.image
+        return
+      end
+    end
+
+    # No images available, render 404
+    redirect_to "http://images.wikia.com/runescape/images/2/21/1x1-pixel.png"
+  end  
+
   # GET /feed_items/:id
   def show
     render :json=>FeedItem.find(params[:id])

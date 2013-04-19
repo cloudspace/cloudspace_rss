@@ -6,6 +6,7 @@ CloudspaceRss::Application.routes.draw do
   
   resource :feed_items do
     get '',                  to: 'feed_items#index',            as: 'index'
+    get ':id/thumbnail',     to: 'feed_items#thumbnail',        as: 'thumbnail'
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
