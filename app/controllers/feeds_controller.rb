@@ -26,14 +26,11 @@ class FeedsController < ApplicationController
 
       # Limit item count
       
-      if params.has_key?(:limit)
-        requested_items = requested_items.limit(params[:limit])
-      end
+      limit = params.has_key?(:limit) ? params[:limit] : 25
+      offset = params.has_key?(:offset) ? params[:offset] : 0
 
-      if params.has_key?(:offset)
-          requested_items = requested_items.offset(params[:offset])
-      end
-      
+      requested_items.limit(limit).offset(offset)
+
       return render :json => requested_items
     end
 
