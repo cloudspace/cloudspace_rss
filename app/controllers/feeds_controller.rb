@@ -10,6 +10,9 @@ require 'thread'
 class FeedsController < ApplicationController  
   # GET /feeds
   def index 
+    limit = params.has_key?(:limit) ? params[:limit] : 10
+    offset = params.has_key?(:offset) ? params[:offset] : 0
+
     if params.has_key?(:url)
       feed = Feed.where(:url => params["url"]).first
 
@@ -22,14 +25,8 @@ class FeedsController < ApplicationController
 
       feed.parse_feed_items
 
-      requested_items = feed.feed_items.reload
-
       # Limit item count
-      
-      limit = params.has_key?(:limit) ? params[:limit] : 25
-      offset = params.has_key?(:offset) ? params[:offset] : 0
-
-      requested_items.limit(limit).offset(offset)
+      requested_items = feed.feed_items.reload.limit(limit).offset(offset)
 
       return render :json => requested_items
     end
@@ -40,6 +37,8 @@ class FeedsController < ApplicationController
     else
       requested_items = Feed.where("feeds.default=? AND name IS NOT NULL", true)
     end
+
+    requested_items = requested_items.limit(limit).offset(offset)
     
     if params.has_key?(:limit)
       requested_items = requested_items.limit(params[:limit])
@@ -61,17 +60,4 @@ class FeedsController < ApplicationController
   def recommended
     return render :json=> matching_feeds = {:feeds => Feed.where('name IS NOT NULL').sample(2)}
   end
-  
-  # # POST /feeds
-  # def create
-    
-  #   f = Feed.new(:name=>params["name"], :url=>params["url"])
-    
-  #   if f.save
-  #     #Parse the feed, get the feeditems
-  #     feed = Feedzirra::Feed.fetch_and_parse(f.url)
-
-   
-    
-  # end
 end
