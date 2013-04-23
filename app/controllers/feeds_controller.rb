@@ -26,7 +26,7 @@ class FeedsController < ApplicationController
       feed.parse_feed_items
 
       # Limit item count
-      requested_items = feed.feed_items.reload.limit(limit).offset(offset)
+      requested_items = feed.feed_items.reload.order("published desc").limit(limit).offset(offset)
 
       return render :json => requested_items
     end
@@ -39,13 +39,6 @@ class FeedsController < ApplicationController
     end
 
     requested_items = requested_items.limit(limit).offset(offset)
-    
-    if params.has_key?(:limit)
-      requested_items = requested_items.limit(params[:limit])
-    end
-    if params.has_key?(:offset)
-      requested_items = requested_items.offset(params[:offset])
-    end
     
     matching_feeds = {:feeds => requested_items}
     return render :json=> matching_feeds
