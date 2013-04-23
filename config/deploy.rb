@@ -76,6 +76,12 @@ namespace :bundler do
   end
 end
 
+namespace :notify do
+  task :say do
+    system "say \" Easy Reader RSS has finished deploying.  You are awesome.\""
+  end
+end
+
 
 set :whenever_command, "bundle exec whenever"
 require "whenever/capistrano"
@@ -86,6 +92,7 @@ after "deploy:update_code", "bundler:bundle_new_release"
 after "deploy:update_code", "deploy:db:migrate"
 after "deploy:update_code", "deploy:db:seed"
 after "deploy", "deploy:cleanup"
-system "say \" Easy Reader RSS has finished deploying.  You are awesome.\""
+after "deploy", "notify:say"
+
 # after "deploy:stop",    "delayed_job:stop"
 # after "deploy:start",   "delayed_job:start"
