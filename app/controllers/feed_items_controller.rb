@@ -47,90 +47,12 @@ class FeedItemsController < ApplicationController
     feedItem = FeedItem.where("id = ?", params[:id]).limit(1).first rescue nil
     
     if (feedItem)
-      # If a readbility image exists but no thumbnail has been generated, generate one and upload it
-      if !feedItem.image
-        begin
-          puts "Finding thumbnail for " + feedItem.url
+      # Generate a thumbnail image if none exists
+      feedItem.generate_thumbnail if !feedItem.image
 
-          # Check feed description for images before anything else
-          doc = Nokogiri::HTML(feedItem.description)
-          
-          summaryImages = doc.xpath("//img/@src")
-          if !summaryImages.empty?
-            summaryImage = summaryImages.first.value
-
-            begin
-              cachedResult = $cache.get summaryImage
-              feedItem.image = cachedResult
-
-            rescue ::Memcached::NotFound
-              # Generate and upload thumbnail
-              feedItem.readability_image = summaryImage
-
-              image = MiniMagick::Image.open(feedItem.readability_image);
-              
-              if image and image[:height] > 100 && image[:width] > 100
-
-                thumbImage = FeedsHelper::resize_and_crop(image, 88)
-                thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')  
-
-                feedItem.image = thumbnailURL
-                feedItem.save
-
-                $cache.set summaryImage, thumbnailURL
-              end
-            end
-          end
-
-          # If none were found in summary try content
-          if (!feedItem.image)
-            begin
-              cachedResult = $cache.get feedItem.url
-              feedItem.image = cachedResult
-
-            rescue ::Memcached::NotFound
-              puts "--GETTING THUMBNAIL FROM CONTENT--"
-              source = open(feedItem.url).read
-              readability = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
-              readabilityImage = readability.images[0]
-
-              # Generate and upload thumbnail
-              feedItem.readability_image = readabilityImage
-
-              image = MiniMagick::Image.open(feedItem.readability_image);
-              
-              if image && image[:height] > 100 && image[:width] > 100
-
-                thumbImage = FeedsHelper::resize_and_crop(image, 88)
-                thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')  
-
-                feedItem.image = thumbnailURL
-                feedItem.save
-
-                $cache.set summaryImage, thumbnailURL
-              end
-            end
-          end
-        rescue => e
-          puts 'ERROR' + e.to_s
-          # Ignore errors
-        end
-      end
-
-      # Redirect to the thumbnail if it exists
-      if feedItem.image
-        redirect_to feedItem.image
-        return
-      end
+      return redirect_to feedItem.image
+    else
+      return redirect_to "file:///"
     end
-
-    # No images available, render 404
-    redirect_to "file:///"
   end  
-
-  # GET /feed_items/:id
-  def show
-    render :json=>FeedItem.find(params[:id])
-  end
-  
 end
