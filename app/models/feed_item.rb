@@ -56,7 +56,7 @@ class FeedItem < ActiveRecord::Base
       # If none were found in summary try content
       if (!self.image)
         begin
-          cachedResult = $cache.get self.url
+          cachedResult = $cache.get "image"+self.url
           self.image = cachedResult
 
         rescue ::Memcached::NotFound
@@ -78,7 +78,7 @@ class FeedItem < ActiveRecord::Base
             self.image = thumbnailURL
             self.save
 
-            $cache.set summaryImage, thumbnailURL
+            $cache.set "image"+self.url, thumbnailURL
           end
         end
       end
