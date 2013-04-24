@@ -53,4 +53,16 @@ class FeedsController < ApplicationController
   def recommended
     return render :json=> matching_feeds = {:feeds => Feed.where('name IS NOT NULL').sample(2)}
   end
+
+  def combined
+    # Throw 404 if no params were passed
+    raise ActionController::RoutingError.new('Not Found') if !params.has_key?(:ids)
+    
+    # Get limit and offset
+    limit = params.has_key?(:limit) ? params[:limit] : 10
+    offset = params.has_key?(:offset) ? params[:offset] : 0
+
+    render :json=> FeedItem.where('feed_id' => params[:ids]).order("published desc").limit(limit).offset(offset)
+    
+  end
 end
