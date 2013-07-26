@@ -1,3 +1,5 @@
+require 'thread'
+
 namespace :feeds do
   task :parse => :environment do
     puts "Parsing feeds"
@@ -18,9 +20,8 @@ namespace :feeds do
 
       threads << Thread.new(index) { |_threadIndex|
         while (!feedQueue.empty?) do
-          _feed = feedQueue.pop
-
           mutex.synchronize do
+            _feed = feedQueue.pop
             puts "[" + _threadIndex.to_s + "] Parsing " + _feed.url
           end
 
