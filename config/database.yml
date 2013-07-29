@@ -10,7 +10,7 @@ development:
   database: cloudspace_rss_staging
   pool: 5
   username: root
-  password: 8DF892JAjdfj2903ijV3lsdf2
+  password: ''
   host: localhost
 
 test:

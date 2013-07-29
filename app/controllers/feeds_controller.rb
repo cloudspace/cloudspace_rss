@@ -43,6 +43,8 @@ class FeedsController < ApplicationController
     matching_feeds = {:feeds => requested_items}
     return render :json=> matching_feeds
   end
+
+
   
   # Get /feeds/:id
 
@@ -56,13 +58,19 @@ class FeedsController < ApplicationController
 
   def combined
     # Throw 404 if no params were passed
-    raise ActionController::RoutingError.new('Not Found') if !params.has_key?(:ids)
-    
+    raise ActionController::RoutingError.new('Not Found') if !params.has_key?(:ids) && !params.has_key?(:urls)
+
     # Get limit and offset
     limit = params.has_key?(:limit) ? params[:limit] : 10
     offset = params.has_key?(:offset) ? params[:offset] : 0
+    puts params
+    if params[:ids] && params[:ids].size > 0
+      return render :json=> FeedItem.where('feed_id' => params[:ids]).order("published desc").limit(limit).offset(offset)  
+    elsif params[:urls] && params[:urls].size > 0
+      return render :json=> FeedItem.joins(:feed).where('feeds.url' => params[:urls]).order("published desc").limit(limit).offset(offset)  
+    end
 
-    render :json=> FeedItem.where('feed_id' => params[:ids]).order("published desc").limit(limit).offset(offset)
+    ActionController::RoutingError.new('Not Found')
     
   end
 end
