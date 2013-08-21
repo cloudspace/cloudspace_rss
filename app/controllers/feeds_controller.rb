@@ -53,7 +53,7 @@ class FeedsController < ApplicationController
   end
 
   def recommended
-    return render :json=> matching_feeds = {:feeds => Feed.where('name IS NOT NULL').sample(2)}
+    return render :json=> {:feeds => Feed.where('name IS NOT NULL').sample(2)}
   end
 
   def combined
@@ -64,9 +64,25 @@ class FeedsController < ApplicationController
     limit = params.has_key?(:limit) ? params[:limit] : 10
     offset = params.has_key?(:offset) ? params[:offset] : 0
     puts params
+
+
     if params[:ids] && params[:ids].size > 0
+      # Update feeds
+      feeds = Feed.joins.where('id' => params[ids])
+      feeds.each do |feed|
+        feed.parse_feed_items
+      end
+
+      # Render feed items
       return render :json=> FeedItem.where('feed_id' => params[:ids]).order("published desc").limit(limit).offset(offset)  
     elsif params[:urls] && params[:urls].size > 0
+      # Update feeds
+      feeds = Feed.joins.where('url' => params[:urls])
+      feeds.each do |feed|
+        feed.parse_feed_items
+      end
+
+      # Render feed items
       return render :json=> FeedItem.joins(:feed).where('feeds.url' => params[:urls]).order("published desc").limit(limit).offset(offset)  
     end
 
