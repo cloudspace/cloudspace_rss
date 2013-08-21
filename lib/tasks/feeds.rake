@@ -1,6 +1,10 @@
 require 'thread'
 
 namespace :feeds do
+  task :clean => :environment do
+    Feed.clean
+  end
+
   task :parse => :environment do
     puts "Parsing feeds"
     feeds = Feed.all

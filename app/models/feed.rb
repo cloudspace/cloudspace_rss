@@ -7,6 +7,26 @@ class Feed < ActiveRecord::Base
   validates_uniqueness_of :url
   has_many :feed_items
   
+  # Removes duplicate feeds
+  def self.clean
+    feeds = Feed.all
+
+    feeds.each do |feed|
+      items = feed.feed_items
+
+      links = Array.new
+
+      items.each do |feed_item|
+        if links.include? feed_item.url
+          feed_item.delete
+        else
+          links.push feed_item.url
+        end
+      end
+    end
+  end
+
+  # Prases feed items
   def parse_feed_items
     begin
 
