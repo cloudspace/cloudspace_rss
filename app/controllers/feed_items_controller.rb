@@ -45,7 +45,7 @@ class FeedItemsController < ApplicationController
   # Generate the thumbnail if it doesn't exist
   def thumbnail
     feedItem = FeedItem.where("id = ?", params[:id]).limit(1).first rescue nil
-    
+
     if (feedItem)
       # Generate a thumbnail image if none exists
       feedItem.generate_thumbnail if !feedItem.image

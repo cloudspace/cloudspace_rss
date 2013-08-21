@@ -5,8 +5,8 @@ class Feed < ActiveRecord::Base
   attr_accessible :category, :description, :name, :thumbnail, :url, :default
   validates_presence_of  :url
   validates_uniqueness_of :url
-  has_many :feed_items
-  
+  has_many :feed_items, dependent: :destroy
+
   # Removes duplicate feeds
   def self.clean
     feeds = Feed.all
@@ -41,14 +41,6 @@ class Feed < ActiveRecord::Base
       
       self.name = feedContent.title
       
-      #The view for rendering to a string
-      #ac = ActionController::Base.new()
-      
-      # Create a workers array and mutex for handling multple threads
-      #mutex = Mutex.new
-      #threads = []
-      #newFeedRecords = []
-
       existing_entry_urls = self.feed_items.collect{|existing_entry| existing_entry.url}
 
       # Generate new feed items
@@ -69,36 +61,6 @@ class Feed < ActiveRecord::Base
 
         newFeedItem.save
       end
-
-      # puts "Finding thumbnails"
-      # #start worker threads to process images
-      # 15.times do |index|
-      #   threads << Thread.new(index) { |_threadIndex|
-      #     while (!newFeedItemQueue.empty?) do
-      #       feedItem = newFeedItemQueue.pop
-
-      #       summaryReadability = Readability::Document.new(feedItem.description, :tags => %w[img], :attributes => %w[src], :remove_empty_nodes => true)
-      #       summaryReadabilityImage = summaryReadability.images[0]
-
-      #       if summaryReadabilityImage
-      #         feedItem.readability_image = summaryReadabilityImage
-      #       end
-
-
-      #       mutex.synchronize do
-      #         newFeedRecords << feedItem
-      #       end
-      #     end
-      #   }
-      # end
-
-      # # # Wait for threads to finish and reset threads array
-      # threads.each(&:join)
-
-      # puts "Saving"
-      # for record in newFeedRecords
-      #   record.save
-      # end
     rescue => e
       puts e
     end

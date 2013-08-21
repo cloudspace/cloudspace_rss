@@ -13,7 +13,7 @@ class FeedItem < ActiveRecord::Base
     
     #For every feed, keep only the latest 30 records
     feeds.each do |feed|
-      newest_records = FeedItem.find(:all, :order => 'created_at DESC', :limit => 30)
+      newest_records = FeedItem.find(:all, :order => 'created_at DESC', :limit => 200)
       FeedItem.destroy_all(['id NOT IN (?)', newest_records.collect(&:id)])
     end
     
@@ -62,16 +62,29 @@ class FeedItem < ActiveRecord::Base
         rescue ::Memcached::NotFound
           puts "--GETTING THUMBNAIL FROM CONTENT--"
           source = open(self.url).read
-          readability = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
-          readabilityImage = readability.images[0]
-
-          # Generate and upload thumbnail
-          self.readability_image = readabilityImage
-
-          image = MiniMagick::Image.open(self.readability_image);
           
-          if image && image[:height] > 100 && image[:width] > 100
+          readability = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
 
+          largestImage = nil
+          largestImageSize = 0
+
+          readability.images.each do |image_url|
+            begin
+              image = MiniMagick::Image.open(image_url);
+              puts image_url
+              imageSize = image[:width] * image[:height]
+
+              if imageSize > largestImageSize
+                largestImage = image
+                largestImageSize = imageSize
+              end
+            rescue Exception
+              next
+            end
+          end
+
+          # Save and crop if image is significant
+          if largestImage && largestImageSize > 1000
             thumbImage = FeedsHelper::resize_and_crop(image, 88)
             thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')  
 
@@ -80,6 +93,9 @@ class FeedItem < ActiveRecord::Base
 
             $cache.set "image"+self.url, thumbnailURL
           end
+
+          # Generate and upload thumbnail
+          self.readability_image = largestImage
         end
       end
     rescue => e

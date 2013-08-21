@@ -9,23 +9,23 @@ namespace :feeds do
     puts "Parsing feeds"
     feeds = Feed.all
 
-    feedQueue = Queue.new
+    # feedQueue = Queue.new
 
-    feeds.each do |feed|
-      feedQueue.push feed
-      
-    end
+    # feeds.each do |feed|
+    #   feedQueue.push feed
+    # end
     
     threads = []
     mutex = Mutex.new
 
     #start worker threads to process images
     5.times do |index|
-
       threads << Thread.new(index) { |_threadIndex|
-        while (!feedQueue.empty?) do
+        while (!feeds.empty?) do
+          _feed = nil
+          
           mutex.synchronize do
-            _feed = feedQueue.pop
+            _feed = feeds.pop
             puts "[" + _threadIndex.to_s + "] Parsing " + _feed.url
           end
 
