@@ -69,7 +69,7 @@ class FeedItem < ActiveRecord::Base
           largestImage = nil
           largestImageSize = 0
 
-          readability.images.each do |image_url|
+          readability.images.first(10).each do |image_url|
             begin
               image = MiniMagick::Image.open(image_url);
               puts image_url
