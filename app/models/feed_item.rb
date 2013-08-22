@@ -11,9 +11,9 @@ class FeedItem < ActiveRecord::Base
   def self.purge_old_records
     #For every feed, keep only the latest 200 records
     Feed.all.each do |feed|
-      newest_records = feed.feed_items.find(:all, :order => 'created_at DESC', :limit => 200)
+      newest_records = feed.feed_items.order('created_at DESC').limit(200)
 
-      feed.feed_items.each do |item|
+      feed.feed_items.find_each do |item|
         item.delete if !newest_records.include? item
       end
     end
