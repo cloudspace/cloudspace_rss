@@ -4,9 +4,9 @@ namespace :feeds do
   task :clean => :environment do
     Feed.clean
   end
-  
+
   task :purge => :environment do
-    FeedItems.purge_old_records
+    FeedItem.purge_old_records
   end
 
   task :parse => :environment do

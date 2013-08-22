@@ -9,12 +9,13 @@ class FeedItem < ActiveRecord::Base
   scope :with_feed_url, lambda { |url| joins(:feed).where('feeds.url = ?', url) }
 
   def self.purge_old_records
-    feeds = Feeds.all
-    
-    #For every feed, keep only the latest 30 records
-    feeds.each do |feed|
+    #For every feed, keep only the latest 200 records
+    Feed.all.each do |feed|
       newest_records = feed.feed_items.find(:all, :order => 'created_at DESC', :limit => 200)
-      FeedItem.destroy_all(['id NOT IN (?)', newest_records.collect(&:id)])
+
+      feed.feed_items.each do |item|
+        item.delete if !newest_records.include? item
+      end
     end
     
   end
