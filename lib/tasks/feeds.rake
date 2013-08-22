@@ -4,6 +4,10 @@ namespace :feeds do
   task :clean => :environment do
     Feed.clean
   end
+  
+  task :purge => :environment do
+    FeedItems.purge_old_records
+  end
 
   task :parse => :environment do
     puts "Parsing feeds"
@@ -36,6 +40,8 @@ namespace :feeds do
 
     # Wait for threads to finish and reset threads array
     threads.each(&:join)
+
+    FeedItems.purge_old_records
 
     puts "Done Parsing"
 
