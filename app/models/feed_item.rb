@@ -13,7 +13,7 @@ class FeedItem < ActiveRecord::Base
     
     #For every feed, keep only the latest 30 records
     feeds.each do |feed|
-      newest_records = FeedItem.find(:all, :order => 'created_at DESC', :limit => 200)
+      newest_records = feed.feed_items.find(:all, :order => 'created_at DESC', :limit => 200)
       FeedItem.destroy_all(['id NOT IN (?)', newest_records.collect(&:id)])
     end
     
