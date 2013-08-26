@@ -104,8 +104,8 @@ class FeedItem < ActiveRecord::Base
       puts 'ERROR' + e.to_s
       # Ignore errors
 
-      self.image = ""
-      self.save
+      # self.image = ""
+      # self.save
     end
   end
 end

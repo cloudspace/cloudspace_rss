@@ -50,6 +50,7 @@ class FeedItemsController < ApplicationController
       # Generate a thumbnail image if none exists
       feedItem.generate_thumbnail if feedItem.image.blank?
 
+      return redirect_to "file:///" if feedItem.image.blank?
       return redirect_to feedItem.image
     else
       return redirect_to "file:///"
