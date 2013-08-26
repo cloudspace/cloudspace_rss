@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-
+gem 'unicorn'
 gem 'nokogiri', '1.5.9'
 gem 'feedzirra'
 gem 'ruby-readability'
@@ -17,6 +17,8 @@ gem 'rmagick'
 gem 'haml'
 gem 'aws-sdk'
 gem 'memcached'
+gem 'www-favicon'
+
 
 #activeadmin requirements
 gem 'activeadmin'

@@ -1,4 +1,5 @@
 require 'memcached'
+require 'www/favicon'
 $cache = Memcached.new("localhost:11211")
 
 class Feed < ActiveRecord::Base
@@ -6,6 +7,24 @@ class Feed < ActiveRecord::Base
   validates_presence_of  :url
   validates_uniqueness_of :url
   has_many :feed_items, dependent: :destroy
+
+  # generates an image for the feed
+  def generate_feed_image
+    return self.image if self.image
+
+    uri = URI.parse(self.url)
+    host = uri.host.split(".").last(2).join(".")
+    faviconurl = WWW::Favicon.new.find "#{uri.scheme}://#{host}"
+    favicon = MiniMagick::Image.open(faviconurl)
+    sizes = favicon["%w,"].split(",").collect { |size| size.to_i }
+    largest_page = sizes.index(sizes.max)
+    favicon.format "png", largest_page
+
+    thumbImage = FeedsHelper::resize_and_crop(favicon, 88)
+    thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')
+
+    return thumbnailURL
+  end
 
   # Removes duplicate feeds
   def self.clean
