@@ -48,7 +48,7 @@ class FeedItemsController < ApplicationController
 
     if (feedItem)
       # Generate a thumbnail image if none exists
-      feedItem.generate_thumbnail if !feedItem.image
+      feedItem.generate_thumbnail if !feedItem.image.blank?
 
       return redirect_to feedItem.image
     else
