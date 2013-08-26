@@ -33,7 +33,7 @@ class FeedItem < ActiveRecord::Base
         summaryImage = summaryImages.first.value
 
         begin
-          cachedResult = $cache.get summaryImage
+          cachedResult = $cache.get "image"+self.url
           self.image = cachedResult
 
         rescue ::Memcached::NotFound
@@ -48,9 +48,7 @@ class FeedItem < ActiveRecord::Base
             thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')  
 
             self.image = thumbnailURL
-            self.save
-
-            $cache.set summaryImage, thumbnailURL
+            $cache.set "image"+self.url, thumbnailURL
           end
         end
       end
@@ -68,6 +66,7 @@ class FeedItem < ActiveRecord::Base
           readability = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
 
           largestImage = nil
+          largestImageURL = nil
           largestImageSize = 0
 
           readability.images.first(10).each do |image_url|
@@ -78,6 +77,7 @@ class FeedItem < ActiveRecord::Base
 
               if imageSize > largestImageSize
                 largestImage = image
+                largestImageURL = image_url
                 largestImageSize = imageSize
               end
             rescue Exception
@@ -91,13 +91,12 @@ class FeedItem < ActiveRecord::Base
             thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')  
 
             self.image = thumbnailURL
+            self.readability_image = largestImageURL
             self.save
 
+            # Generate and upload thumbnail
             $cache.set "image"+self.url, thumbnailURL
           end
-
-          # Generate and upload thumbnail
-          self.readability_image = largestImage
         end
       end
     rescue => e
