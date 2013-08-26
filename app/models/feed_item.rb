@@ -22,6 +22,7 @@ class FeedItem < ActiveRecord::Base
 
   def generate_thumbnail
     begin
+      Rails.logger.error("Generating thumbnail for " + self.url) 
       puts "Generating thumbnail for " + self.url
 
       # Check feed description for images before anything else
@@ -100,6 +101,7 @@ class FeedItem < ActiveRecord::Base
         end
       end
     rescue => e
+      Rails.logger.error(e.to_S) 
       puts 'ERROR' + e.to_s
       # Ignore errors
 
