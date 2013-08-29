@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 
-gem 'unicorn'
 gem 'nokogiri', '1.5.9'
 gem 'feedzirra'
 gem 'ruby-readability'
@@ -20,13 +19,12 @@ gem 'memcached'
 gem 'www-favicon'
 
 
+
 #activeadmin requirements
+gem 'jquery-ui-rails'
 gem 'activeadmin'
 gem "meta_search",    '>= 1.1.0.pre'
 
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :production, :staging do
   gem 'unicorn'
@@ -49,20 +47,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
 gem 'rake'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 gem 'capistrano-ext'
-
-# To use debugger
-# gem 'debugger'
