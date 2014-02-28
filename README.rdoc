@@ -15,4 +15,4 @@
   echo -e "\nexport DEVISE_SECRET_KEY=$(openssl rand -hex 64)" >> ~/.bashrc
   source ~/.bashrc
   rake db:setup
-  nohup rails s ^>/dev/null &
+  nohup rails s &>/dev/null &
