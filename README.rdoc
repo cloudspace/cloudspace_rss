@@ -12,7 +12,9 @@
   sudo gem install bundler
   cd /srv/cloudspace_rss
   bundle
-  echo -e "\nexport DEVISE_SECRET_KEY=$(openssl rand -hex 64)" >> ~/.bashrc
+  echo >> ~/.bashrc
+  echo "export DEVISE_SECRET_KEY=$(openssl rand -hex 64)" >> ~/.bashrc
+  echo "export SECRET_TOKEN=$(openssl rand -hex 64)" >> ~/.bashrc
   source ~/.bashrc
   rake db:setup
   nohup rails s &>/dev/null &
