@@ -8,7 +8,7 @@
 
 <b>After the box is up, <tt>vagrant ssh</tt> and configure it</b>
   
-  sudo apt-get install libmagickwand-dev libsasl2-dev memcached libmemcache-dev # needed for rmagick and memcached, respectively
+  sudo apt-get -y install libmagickwand-dev libsasl2-dev memcached libmemcache-dev # needed for rmagick and memcached, respectively
   sudo gem install bundler
   cd /srv/cloudspace_rss
   bundle
