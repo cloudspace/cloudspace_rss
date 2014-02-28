@@ -61,7 +61,11 @@ class FeedItem < ActiveRecord::Base
 
         rescue ::Memcached::NotFound
           puts "--GETTING THUMBNAIL FROM CONTENT--"
-          source = open(self.url).read
+
+          response = HTTParty.get(self.url)
+          uri = response.request.last_uri
+          source = response.body
+          base_url = uri.scheme + "://" + uri.host
           
           readability = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
 
@@ -71,7 +75,8 @@ class FeedItem < ActiveRecord::Base
 
           readability.images.first(10).each do |image_url|
             begin
-              image = MiniMagick::Image.open(image_url);
+              image_url = base_url + image_url unless image_url.include? base_url
+              image = MiniMagick::Image.open(image_url)
               puts image_url
               imageSize = image[:width] * image[:height]
 
@@ -80,7 +85,9 @@ class FeedItem < ActiveRecord::Base
                 largestImageURL = image_url
                 largestImageSize = imageSize
               end
-            rescue Exception
+            rescue => e
+              Rails.logger.error(e.inspect) 
+              puts 'ERROR' + e.inspect
               next
             end
           end
@@ -100,8 +107,8 @@ class FeedItem < ActiveRecord::Base
         end
       end
     rescue => e
-      Rails.logger.error(e.to_S) 
-      puts 'ERROR' + e.to_s
+      Rails.logger.error(e.inspect) 
+      puts 'ERROR' + e.inspect
       # Ignore errors
 
       # self.image = ""

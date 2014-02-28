@@ -17,6 +17,7 @@ gem 'haml'
 gem 'aws-sdk'
 gem 'memcached'
 gem 'www-favicon'
+gem 'httparty'
 
 
 
