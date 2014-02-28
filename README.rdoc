@@ -5,11 +5,13 @@
 2. cd ./cloudspace_rss
 3. vagrant up
 
-<b>After the box is up, configure it</b>
-1. vagrant ssh
-2. sudo apt-get install libmagickwand-dev libsasl2-dev #needed for rmagick and memcached, respectively
-3. sudo gem install bundler
-4. cd /srv/cloudspace_rss
-5. bundle
-6. rake db:setup
-7. rails s #start the rails server
+<b>After the box is up, <pre>vagrant ssh</pre> and configure it</b>
+  
+  sudo apt-get install libmagickwand-dev libsasl2-dev #needed for rmagick and memcached, respectively
+  sudo gem install bundler
+  cd /srv/cloudspace_rss
+  bundle
+  echo -e "\nexport DEVISE_SECRET_KEY=$(openssl rand -hex 64)" >> ~/.bashrc
+  source ~/.bashrc
+  rake db:setup
+  nohup rails s ^>/dev/null &
