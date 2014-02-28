@@ -64,18 +64,27 @@ class FeedItem < ActiveRecord::Base
 
           response = HTTParty.get(self.url)
           uri = response.request.last_uri
-          source = response.body
           base_url = uri.scheme + "://" + uri.host
           
-          readability = Readability::Document.new(source, :tags => %w[div p img a], :attributes => %w[src href], :remove_empty_nodes => true)
+          images = Nokogiri::HTML(response).css('img').map { |image| image['src'] }
 
           largestImage = nil
           largestImageURL = nil
           largestImageSize = 0
 
-          readability.images.first(10).each do |image_url|
+          images.first(10).each do |image_url|
             begin
-              image_url = base_url + image_url unless image_url.include? base_url
+              # handle non-URL images
+              unless image_url.include? base_url
+                if image_url[0] == '/'
+                  # absolute
+                  image_url = base_url + image_url
+                else
+                  # relative
+                  image_url = base_url + uri.path + image_url
+                end
+              end
+
               image = MiniMagick::Image.open(image_url)
               puts image_url
               imageSize = image[:width] * image[:height]
