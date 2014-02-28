@@ -15,7 +15,7 @@ gem 'socksify'
 gem 'rmagick'
 gem 'haml'
 gem 'aws-sdk'
-gem 'memcached'
+gem 'dalli'
 gem 'www-favicon'
 gem 'httparty'
 

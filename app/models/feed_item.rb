@@ -1,6 +1,3 @@
-require 'memcached'
-$cache = Memcached.new("localhost:11211")
-
 class FeedItem < ActiveRecord::Base
   attr_accessible :description, :image, :name, :url, :feed_id, :readability_content, :readability_image, :published
   validates_presence_of :name, :url
@@ -32,11 +29,7 @@ class FeedItem < ActiveRecord::Base
       if !summaryImages.empty?
         summaryImage = summaryImages.first.value
 
-        begin
-          cachedResult = $cache.get "image"+self.url
-          self.image = cachedResult
-
-        rescue ::Memcached::NotFound
+        cachedResult = Rails.cache.fetch('image' + self.url) do
           # Generate and upload thumbnail
           self.readability_image = summaryImage
 
@@ -48,18 +41,13 @@ class FeedItem < ActiveRecord::Base
             thumbnailURL = FeedsHelper::upload_thumbnail_to_aws(thumbImage, 'cloudspace_rss_thumbs')  
 
             self.image = thumbnailURL
-            $cache.set "image"+self.url, thumbnailURL
           end
         end
       end
 
       # If none were found in summary try content
       if (!self.image)
-        begin
-          cachedResult = $cache.get "image"+self.url
-          self.image = cachedResult
-
-        rescue ::Memcached::NotFound
+        self.image = Rails.cache.fetch('image' + self.url) do
           puts "--GETTING THUMBNAIL FROM CONTENT--"
 
           response = HTTParty.get(self.url)
@@ -109,9 +97,9 @@ class FeedItem < ActiveRecord::Base
             self.image = thumbnailURL
             self.readability_image = largestImageURL
             self.save
-
-            # Generate and upload thumbnail
-            $cache.set "image"+self.url, thumbnailURL
+            thumbnailURL
+          else
+            nil
           end
         end
       end

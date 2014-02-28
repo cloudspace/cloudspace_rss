@@ -1,6 +1,4 @@
-require 'memcached'
 require 'www/favicon'
-$cache = Memcached.new("localhost:11211")
 
 class Feed < ActiveRecord::Base
   attr_accessible :category, :description, :name, :thumbnail, :url, :default
@@ -48,37 +46,31 @@ class Feed < ActiveRecord::Base
   # Prases feed items
   def parse_feed_items
     begin
-
-      #Parse the feed, get the feeditems
-      begin
-        feedContent = $cache.get "feed" + self.url
-      rescue ::Memcached::NotFound
-        puts "NOT CACHED, FETCHING"
-        feedContent = Feedzirra::Feed.fetch_and_parse(self.url)
-        $cache.set "feed"+self.url, feedContent, 600
+      feed_content = Rails.cache.fetch('feed' + self.url, :expires_in => 600) do
+        Feedzirra::Feed.fetch_and_parse(self.url)
       end
       
-      self.name = feedContent.title
+      self.name = feed_content.title
       
-      existing_entry_urls = self.feed_items.collect{|existing_entry| existing_entry.url}
+      existing_entry_urls = self.feed_items.collect { |existing_entry| existing_entry.url }
 
       # Generate new feed items
-      for feedEntry in feedContent.entries
+      feed_content.entries.each do |feed_entry|
         # Don't process duplicates
-        if existing_entry_urls.include? feedEntry.url
+        if existing_entry_urls.include? feed_entry.url
           next
         end
 
         # Create the initial record
-        newFeedItem = FeedItem.new
+        new_feed_item = FeedItem.new
 
-        newFeedItem.name = feedEntry.title
-        newFeedItem.url = feedEntry.url
-        newFeedItem.description = feedEntry.summary
-        newFeedItem.feed_id = self.id
-        newFeedItem.published = feedEntry.published
+        new_feed_item.name = feed_entry.title
+        new_feed_item.url = feed_entry.url
+        new_feed_item.description = feed_entry.summary
+        new_feed_item.feed_id = self.id
+        new_feed_item.published = feed_entry.published
 
-        newFeedItem.save
+        new_feed_item.save
       end
     rescue => e
       puts e
