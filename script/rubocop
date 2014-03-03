@@ -1,0 +1,2 @@
+#!/bin/bash
+rubocop --rails --config ./config/rubocop_settings.yml ./lib ./spec ./app ./config

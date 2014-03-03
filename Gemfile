@@ -32,6 +32,11 @@ end
 
 group :development do
   gem 'debugger'
+
+  # Code Metric Gems
+  gem 'rails_best_practices', '~> 1.14.4'
+  gem 'rubocop', '~> 0.18.1'
+  gem 'metric_fu', '~> 4.6.0'
 end
 
 # Gems used only for assets and not required
