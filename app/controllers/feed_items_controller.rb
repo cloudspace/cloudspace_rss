@@ -1,6 +1,4 @@
 require 'readability'
-require 'memcached'
-$cache = Memcached.new("localhost:11211")
 
 class FeedItemsController < ApplicationController
   # GET /feed_items
